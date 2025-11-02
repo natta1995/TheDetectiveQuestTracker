@@ -11,10 +11,12 @@ namespace TheDetectiveQuestTracker
     {
         static void Main(string[] args)
         {
-            var repo = new InMemoryUserRepository();
+            // var repo = new InMemoryUserRepository();
+            var repo = new JsonFileUserRepository();
             var auth = new Auth(repo);
 
-            var questRepo = new InMemoryQuestRepository();
+            // var questRepo = new InMemoryQuestRepository();
+            var questRepo = new JsonFileQuestRepository();
             var questGen = new MurderQuestGenerator();
 
             User? currentUser = null;
