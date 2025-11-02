@@ -23,6 +23,19 @@ namespace TheDetectiveQuestTracker
 
             bool running = true;
 
+            const string TitleArt = @"
+           
+┌────────────────────────────────────────────────────────────────────────────────────────────────────────────-┐
+│                                                                                                             │
+│   _____ _          ___      _          _   _            ___              _     _____            _           │
+│  |_   _| |_  ___  |   \ ___| |_ ___ __| |_(_)_ _____   / _ \ _  _ ___ __| |_  |_   _| _ __ _ __| |_____ _ _ │
+│    | | | ' \/ -_) | |) / -_)  _/ -_) _|  _| \ V / -_) | (_) | || / -_|_-<  _|   | || '_/ _` / _| / / -_) '_|│
+│    |_| |_||_\___| |___/\___|\__\___\__|\__|_|\_/\___|  \__\_\\_,_\___/__/\__|   |_||_| \__,_\__|_\_\___|_|  │
+│                                                                                                             │
+└────────────────────────────────────────────────────────────────────────────────────────────────────────────-┘
+                                                                                                                                
+            ";
+
             while (running)
             {
                 Console.Clear();
@@ -30,20 +43,22 @@ namespace TheDetectiveQuestTracker
                 // === Ingen inloggad ===
                 if (currentUser == null)
                 {
-                    Console.WriteLine("=== The Detective Quest Tracker ===");
-                    Console.WriteLine("1) Register");
-                    Console.WriteLine("2) Login");
-                    Console.WriteLine("0) Exit");
+                    Console.WriteLine($"{TitleArt}");
+
+
+                    Console.WriteLine("1) Join the Agency");
+                    Console.WriteLine("2) Open Case Files");
+                    Console.WriteLine("0) Close");
                     Console.Write("Val: ");
                     var choice = Console.ReadLine();
 
                     switch (choice)
                     {
                         case "1":
-                            Console.Write("Username: ");
+                            Console.Write("Alias: ");
                             var u = Console.ReadLine() ?? "";
 
-                            Console.Write("Password: ");
+                            Console.Write("Code: ");
                             var p = Console.ReadLine() ?? "";
 
                             Console.Write("Email (valfritt): ");
@@ -58,10 +73,10 @@ namespace TheDetectiveQuestTracker
                             break;
 
                         case "2":
-                            Console.Write("Username: ");
+                            Console.Write("Alias: ");
                             var lu = Console.ReadLine() ?? "";
 
-                            Console.Write("Password: ");
+                            Console.Write("Code: ");
                             var lp = Console.ReadLine() ?? "";
 
                             var (okL, user, msgL) = auth.Login(lu, lp);
@@ -76,7 +91,7 @@ namespace TheDetectiveQuestTracker
                             break;
 
                         default:
-                            Console.WriteLine("Ogiltigt val.");
+                            Console.WriteLine("Invalid choice.");
                             Console.ReadKey();
                             break;
                     }
@@ -84,11 +99,13 @@ namespace TheDetectiveQuestTracker
                 // === Inloggad meny ===
                 else
                 {
-                    Console.WriteLine("=== The Detective Quest Tracker ===");
-                    Console.WriteLine($"Välkommen, {currentUser.Username}!");
+                    Console.WriteLine($"{TitleArt}");
+                    Console.WriteLine($"Welcome, Detective {currentUser.Username}");
+                    Console.WriteLine("We’ve been waiting for you...");
                     Console.WriteLine();
-                    Console.WriteLine("1) Mordfall");
-                    Console.WriteLine("9) Logout");
+                    Console.WriteLine("10) Show briefing");
+                    Console.WriteLine("1) Step into the dark");
+                    Console.WriteLine("9) Step out");
                     Console.WriteLine("0) Exit");
                     Console.Write("Val: ");
                     var choice = Console.ReadLine();
@@ -105,12 +122,16 @@ namespace TheDetectiveQuestTracker
                             Console.ReadKey();
                             break;
 
+                        case "10":
+                            ConsoleUi.ShowBriefingPaged(currentUser.Username);
+                            break;
+
                         case "0":
                             running = false;
                             break;
 
                         default:
-                            Console.WriteLine("Ogiltigt val.");
+                            Console.WriteLine("Invalid choice.");
                             Console.ReadKey();
                             break;
                     }
@@ -119,14 +140,27 @@ namespace TheDetectiveQuestTracker
         }
         static void QuestMenu(User currentUser, IQuestRepository questRepo, MurderQuestGenerator gen)
         {
+            const string TitleArt = @"
+           
+┌────────────────────────────────────────────────────────────────────────────────────────────────────────────-┐
+│                                                                                                             │
+│   _____ _          ___      _          _   _            ___              _     _____            _           │
+│  |_   _| |_  ___  |   \ ___| |_ ___ __| |_(_)_ _____   / _ \ _  _ ___ __| |_  |_   _| _ __ _ __| |_____ _ _ │
+│    | | | ' \/ -_) | |) / -_)  _/ -_) _|  _| \ V / -_) | (_) | || / -_|_-<  _|   | || '_/ _` / _| / / -_) '_|│
+│    |_| |_||_\___| |___/\___|\__\___\__|\__|_|\_/\___|  \__\_\\_,_\___/__/\__|   |_||_| \__,_\__|_\_\___|_|  │
+│                                                                                                             │
+└────────────────────────────────────────────────────────────────────────────────────────────────────────────-┘
+                                                                                                                                
+            ";
+
             var loop = true;
             while (loop)
             {
                 Console.Clear();
-                Console.WriteLine("=== Uppdrag (enkelt) ===");
-                Console.WriteLine("1) Skapa nytt uppdrag");
-                Console.WriteLine("2) Visa mina uppdrag");
-                Console.WriteLine("0) Tillbaka");
+                Console.WriteLine($"{TitleArt}");
+                Console.WriteLine("1) Take a new case");
+                Console.WriteLine("2) Ongoing murder cases");
+                Console.WriteLine("0) Return");
                 Console.Write("Val: ");
                 var c = Console.ReadLine();
 
@@ -135,7 +169,7 @@ namespace TheDetectiveQuestTracker
                     case "1":
                         var q = gen.Generate();
                         q.OwnerUsername = currentUser.Username;
-                        q.Status = QuestStatus.Accepted; // direkt-accept för enkel start
+                        q.Status = QuestStatus.Accepted; 
                         questRepo.Add(q);
 
                         Console.WriteLine($"\nSkapade: {q.Title}");
@@ -148,7 +182,7 @@ namespace TheDetectiveQuestTracker
                         var my = questRepo.GetForUser(currentUser.Username).ToList();
                         if (!my.Any())
                         {
-                            Console.WriteLine("Du har inga uppdrag än.");
+                            Console.WriteLine("You don’t have any cases yet.");
                         }
                         else
                         {
