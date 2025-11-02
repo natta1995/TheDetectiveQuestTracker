@@ -1,7 +1,10 @@
-﻿using TheDetectiveQuestTracker.Modell;        // User
+﻿using System;
+using TheDetectiveQuestTracker.Modell;        // User
 using TheDetectiveQuestTracker.Repositories;  // InMemoryUserRepository
 using TheDetectiveQuestTracker.Repositories.TheDetectiveQuestTracker.Repositories;
 using TheDetectiveQuestTracker.Services;      // Auth
+
+
 
 
 
@@ -11,6 +14,8 @@ namespace TheDetectiveQuestTracker
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             // var repo = new InMemoryUserRepository();
             var repo = new JsonFileUserRepository();
             var auth = new Auth(repo);
@@ -43,18 +48,23 @@ namespace TheDetectiveQuestTracker
                 // === Ingen inloggad ===
                 if (currentUser == null)
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine($"{TitleArt}");
+                    Console.ResetColor();
 
-
-                    Console.WriteLine("1) Join the Agency");
-                    Console.WriteLine("2) Open Case Files");
-                    Console.WriteLine("0) Close");
+                    Console.WriteLine(" Welcome to The Secret Society");
+                    Console.WriteLine();
+                    Console.WriteLine("1) 🕵️ Become a member");
+                    Console.WriteLine("2) 🚪 Enter the society");
+                    Console.WriteLine();
+                    Console.WriteLine("0) 🔚 End game");
                     Console.Write("Val: ");
                     var choice = Console.ReadLine();
 
                     switch (choice)
                     {
                         case "1":
+                        
                             Console.Write("Alias: ");
                             var u = Console.ReadLine() ?? "";
 
@@ -99,14 +109,18 @@ namespace TheDetectiveQuestTracker
                 // === Inloggad meny ===
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine($"{TitleArt}");
-                    Console.WriteLine($"Welcome, Detective {currentUser.Username}");
+                    Console.ResetColor();
+                    Console.WriteLine($"Welcome, Detective {currentUser.Username} 🕵️ ");
                     Console.WriteLine("We’ve been waiting for you...");
                     Console.WriteLine();
-                    Console.WriteLine("10) Show briefing");
-                    Console.WriteLine("1) Step into the dark");
+                    Console.WriteLine("10) 📜 Open you invetation");
+                    Console.WriteLine("1) 🚪 Step into the dark");
                     Console.WriteLine("9) Step out");
-                    Console.WriteLine("0) Exit");
+                    Console.WriteLine();
+                    Console.WriteLine("0) 🔚 End game");
+                   
                     Console.Write("Val: ");
                     var choice = Console.ReadLine();
 
@@ -140,6 +154,9 @@ namespace TheDetectiveQuestTracker
         }
         static void QuestMenu(User currentUser, IQuestRepository questRepo, MurderQuestGenerator gen)
         {
+
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
             const string TitleArt = @"
            
 ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────-┐
@@ -157,10 +174,14 @@ namespace TheDetectiveQuestTracker
             while (loop)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine($"{TitleArt}");
-                Console.WriteLine("1) Take a new case");
-                Console.WriteLine("2) Ongoing murder cases");
-                Console.WriteLine("0) Return");
+                Console.ResetColor();
+                Console.WriteLine("What will be your next step detective? 🕵️"); 
+                Console.WriteLine("1) 🔍 Take a new case");
+                Console.WriteLine("2) 📂 Ongoing murder cases");
+                Console.WriteLine();
+                Console.WriteLine("0) 🚪 Go back");
                 Console.Write("Val: ");
                 var c = Console.ReadLine();
 

@@ -23,8 +23,8 @@ namespace TheDetectiveQuestTracker.Services
         public (bool ok, string msg) Register(string username, string password, string email, string phone)
         {
             // 1) Grundkoll
-            if (string.IsNullOrWhiteSpace(username)) return (false, "Användarnamn krävs.");
-            if (string.IsNullOrWhiteSpace(password)) return (false, "Lösenord krävs.");
+            if (string.IsNullOrWhiteSpace(username)) return (false, "Alias is required.");
+            if (string.IsNullOrWhiteSpace(password)) return (false, "Code is required.");
 
             // 2) Lösenordspolicy (enkel)
             var (valid, policyMsg) = ValidatePassword(password);
@@ -62,7 +62,7 @@ namespace TheDetectiveQuestTracker.Services
             user.LastLogin = DateTime.UtcNow;
             _repo.Update(user);
 
-            return (true, user, $"Welcome back, detective, {user.Username}!");
+            return (true, user, $"Welcome ... detective, {user.Username}");
         }
 
         // (Valfri) Logout – här kan du bara nolla ev. session om du använder en
