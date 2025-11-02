@@ -1,6 +1,9 @@
 ﻿using TheDetectiveQuestTracker.Modell;        // User
 using TheDetectiveQuestTracker.Repositories;  // InMemoryUserRepository
+using TheDetectiveQuestTracker.Repositories.TheDetectiveQuestTracker.Repositories;
 using TheDetectiveQuestTracker.Services;      // Auth
+
+
 
 namespace TheDetectiveQuestTracker
 {
@@ -10,6 +13,10 @@ namespace TheDetectiveQuestTracker
         {
             var repo = new InMemoryUserRepository();
             var auth = new Auth(repo);
+
+            var questRepo = new InMemoryQuestRepository();
+            var questGen = new MurderQuestGenerator();
+
             User? currentUser = null;
 
             bool running = true;
@@ -78,7 +85,7 @@ namespace TheDetectiveQuestTracker
                     Console.WriteLine("=== The Detective Quest Tracker ===");
                     Console.WriteLine($"Välkommen, {currentUser.Username}!");
                     Console.WriteLine();
-                    Console.WriteLine("1) (Här kommer Quest-menyn senare)");
+                    Console.WriteLine("1) Mordfall");
                     Console.WriteLine("9) Logout");
                     Console.WriteLine("0) Exit");
                     Console.Write("Val: ");
@@ -87,8 +94,7 @@ namespace TheDetectiveQuestTracker
                     switch (choice)
                     {
                         case "1":
-                            Console.WriteLine("TODO: Quest-menyn läggs till här.");
-                            Console.ReadKey();
+                            QuestMenu(currentUser, questRepo, questGen);
                             break;
 
                         case "9":
@@ -109,6 +115,62 @@ namespace TheDetectiveQuestTracker
                 }
             }
         }
+        static void QuestMenu(User currentUser, IQuestRepository questRepo, MurderQuestGenerator gen)
+        {
+            var loop = true;
+            while (loop)
+            {
+                Console.Clear();
+                Console.WriteLine("=== Uppdrag (enkelt) ===");
+                Console.WriteLine("1) Skapa nytt uppdrag");
+                Console.WriteLine("2) Visa mina uppdrag");
+                Console.WriteLine("0) Tillbaka");
+                Console.Write("Val: ");
+                var c = Console.ReadLine();
+
+                switch (c)
+                {
+                    case "1":
+                        var q = gen.Generate();
+                        q.OwnerUsername = currentUser.Username;
+                        q.Status = QuestStatus.Accepted; // direkt-accept för enkel start
+                        questRepo.Add(q);
+
+                        Console.WriteLine($"\nSkapade: {q.Title}");
+                        Console.WriteLine(q.Description);
+                        Console.WriteLine($"ID: {q.Id}");
+                        Console.ReadKey();
+                        break;
+
+                    case "2":
+                        var my = questRepo.GetForUser(currentUser.Username).ToList();
+                        if (!my.Any())
+                        {
+                            Console.WriteLine("Du har inga uppdrag än.");
+                        }
+                        else
+                        {
+                            foreach (var mq in my)
+                            {
+                                Console.WriteLine($"\n[{mq.Status}] {mq.Title}");
+                                Console.WriteLine(mq.Description);
+                                Console.WriteLine($"ID: {mq.Id}");
+                            }
+                        }
+                        Console.ReadKey();
+                        break;
+
+                    case "0":
+                        loop = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("Ogiltigt val."); Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
     }
 }
 
