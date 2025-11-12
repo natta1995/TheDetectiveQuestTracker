@@ -1,56 +1,56 @@
-﻿using System;
+﻿
+// UI/Menus/LoggedInMenu.cs
+using System;
 using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
 using TheDetectiveQuestTracker.Services;
 
-
-namespace TheDetectiveQuestTracker.UI.Menus;
-
-internal static class LoggedInMenu
+namespace TheDetectiveQuestTracker.UI.Menus
 {
-    public static bool Show(
-        User currentUser,
-        IQuestRepository questRepo,
-        MurderQuestGenerator questGen,
-        out User? nextUser)
+    internal static class LoggedInMenu
     {
-        nextUser = currentUser;
-
-        ConsoleHelpers.ClearWithTitle();
-        Console.WriteLine($"Welcome, Detective {currentUser.Username} 🕵️");
-        Console.WriteLine("We’ve been waiting for you...\n");
-        Console.WriteLine("10) 📜 Open your letter");
-        Console.WriteLine("1)  🚪 Step into you office");
-        Console.WriteLine("9)  🚶 Step out of building");
-        Console.WriteLine();
-        Console.WriteLine("0) 🔚 Exit");
-        Console.Write("Val: ");
-        var choice = Console.ReadLine();
-
-        switch (choice)
+        public static bool Show(User currentUser, IQuestRepository questRepo, MurderQuestGenerator questGen, out User? nextUser)
         {
-            case "1":
-                QuestMenu.Show(currentUser, questRepo, questGen);
-                return true;
+            nextUser = currentUser;
 
-            case "9":
-                nextUser = null;
-                Console.WriteLine("Utloggad.");
-                ConsoleHelpers.Pause();
-                return true;
+            var selection = ConsoleMenu.Select(
+                title: $"Welcome, Detective {currentUser.Username} 🕵️\nWe’ve been waiting for you...",
+                options: new[]
+                {
+                    "📜 Open your letter",
+                    "🚪 Step into yor office",
+                    "🚶 Log out",
+                    "🔚 End game"
+                },
+                startIndex: 1
+            );
 
-            case "10":
-                ConsoleUi.ShowBriefingPaged(currentUser.Username); // din befintliga UI-funktion
-                ConsoleHelpers.Pause();
-                return true;
+            switch (selection)
+            {
+                case 0:
+                    Console.Clear();
+                    TitleArt.Draw();
+                    ConsoleUi.ShowBriefingPaged(currentUser.Username); // din befintliga
+                    ConsoleHelpers.Pause();
+                    return true;
 
-            case "0":
-                return false;
+                case 1:
+                    QuestMenu.Show(currentUser, questRepo, questGen);
+                    return true;
 
-            default:
-                Console.WriteLine("Invalid choice.");
-                ConsoleHelpers.Pause();
-                return true;
+                case 2:
+                    nextUser = null;
+                    Console.WriteLine("Utloggad.");
+                    ConsoleHelpers.Pause();
+                    return true;
+
+                case 3:
+                case -1:
+                    return false;
+
+                default:
+                    return true;
+            }
         }
     }
 }
