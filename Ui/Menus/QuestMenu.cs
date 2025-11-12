@@ -39,10 +39,10 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     title: "What will be your next step, detective? 🕵️",
                     options: new[]
                     {
-                        "🔍 Open a new murder case file",
-                        "📂 Open your desktop and review ongoing cases",
-                        "🫖 Call on butler, Mr Gray",
-                        "🚪 Leave office"
+                        "🔍 Take on a new case",
+                        "📂 Review ongoing cases",
+                        "🫖 Call on youré butler (Mr Gray)",
+                        "🚪 Go back"
                     },
                     startIndex: 0
                 );
