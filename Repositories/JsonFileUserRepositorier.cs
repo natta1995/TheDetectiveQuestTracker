@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TheDetectiveQuestTracker.Modell;
+using TheDetectiveQuestTracker.Repositories;
 
 namespace TheDetectiveQuestTracker.Repositories
 {
