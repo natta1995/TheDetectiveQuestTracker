@@ -62,7 +62,7 @@ namespace TheDetectiveQuestTracker.Services
             user.LastLogin = DateTime.UtcNow;
             _repo.Update(user);
 
-            return (true, user, $"Welcome ... detective, {user.Username}");
+            return (true, user, $"Welcome ... detective, {user.Username}, we have been wating for you. Is it your first time here? Then start by opeing the letter.");
         }
 
         // (Valfri) Logout – här kan du bara nolla ev. session om du använder en
