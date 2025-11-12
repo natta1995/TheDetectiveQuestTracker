@@ -19,11 +19,11 @@ internal static class LoggedInMenu
         ConsoleHelpers.ClearWithTitle();
         Console.WriteLine($"Welcome, Detective {currentUser.Username} 🕵️");
         Console.WriteLine("We’ve been waiting for you...\n");
-        Console.WriteLine("10) 📜 Open your invitation");
-        Console.WriteLine("1)  🚪 Step into the dark");
-        Console.WriteLine("9)  🚶 Sign out");
+        Console.WriteLine("10) 📜 Open your letter");
+        Console.WriteLine("1)  🚪 Step into you office");
+        Console.WriteLine("9)  🚶 Step out of building");
         Console.WriteLine();
-        Console.WriteLine("0) 🔚 End game");
+        Console.WriteLine("0) 🔚 Exit");
         Console.Write("Val: ");
         var choice = Console.ReadLine();
 

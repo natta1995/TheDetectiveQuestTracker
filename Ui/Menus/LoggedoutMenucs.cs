@@ -15,9 +15,9 @@ internal static class LoggedOutMenu
         Console.WriteLine(" Welcome to The Secret Society");
         Console.WriteLine();
         Console.WriteLine("1) 🕵️ Become a member");
-        Console.WriteLine("2) 🚪 Enter the society");
+        Console.WriteLine("2) 🚪 Enter the building");
         Console.WriteLine();
-        Console.WriteLine("0) 🔚 End game");
+        Console.WriteLine("0) 🔚 Exit");
         Console.Write("Val: ");
         var choice = Console.ReadLine();
 
