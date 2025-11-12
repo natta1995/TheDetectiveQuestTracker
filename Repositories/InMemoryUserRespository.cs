@@ -1,12 +1,12 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TheDetectiveQuestTracker.Modell;
 
 namespace TheDetectiveQuestTracker.Repositories
 {
+    // === USER REPO ===
     public class InMemoryUserRepository : IUserRepository
     {
         private readonly List<User> _users = new();
@@ -19,23 +19,20 @@ namespace TheDetectiveQuestTracker.Repositories
         public void Update(User user) { /* inget behövs för InMemory */ }
     }
 
-    namespace TheDetectiveQuestTracker.Repositories
+    // === QUEST REPO ===
+    public interface IQuestRepository
     {
-        public interface IQuestRepository
-        {
-            void Add(Quest q);
-            IEnumerable<Quest> GetForUser(string username);
-        }
-
-        public class InMemoryQuestRepository : IQuestRepository
-        {
-            private readonly List<Quest> _items = new();
-
-            public void Add(Quest q) => _items.Add(q);
-
-            public IEnumerable<Quest> GetForUser(string username)
-                => _items.Where(x => x.OwnerUsername == username);
-        }
+        void Add(Quest q);
+        IEnumerable<Quest> GetForUser(string username);
     }
 
+    public class InMemoryQuestRepository : IQuestRepository
+    {
+        private readonly List<Quest> _items = new();
+
+        public void Add(Quest q) => _items.Add(q);
+
+        public IEnumerable<Quest> GetForUser(string username)
+            => _items.Where(x => x.OwnerUsername == username);
+    }
 }
