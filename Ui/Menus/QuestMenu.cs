@@ -41,7 +41,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     {
                         "🔍 Open a new murder case file",
                         "📂 Open your desktop and review ongoing cases",
-                        "🫖 Call on butler, Mr Gray",
+                        "🤵‍♂️ Call on butler (Mr. Hargreaves)",
                         "🚪 Leave office"
                     },
                     startIndex: 0
@@ -87,7 +87,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         Console.Clear();
                         TitleArt.Draw();
                         var msg = GetRandomMessage();
-                        Console.WriteLine($"Mr Gray: {msg}");
+                        Console.WriteLine($"🤵‍♂️ Mr Hargreaves: {msg}");
                         ConsoleHelpers.Pause();
                         break;
 
