@@ -3,6 +3,7 @@ using System.Linq;
 using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
 using TheDetectiveQuestTracker.Services;
+using TheDetectiveQuestTracker.Ui.TheDetectiveQuestTracker.UI;
 
 namespace TheDetectiveQuestTracker.UI.Menus
 {
@@ -42,6 +43,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         "🔍 Take on a new case",
                         "📂 Rewiew your ongoing cases",
                         "🤵‍♂️ Call on butler (Mr. Hargreaves)",
+                        "📻 Turn on the the wireless",
                         "🚪 Leave office"
                     },
                     startIndex: 0
@@ -118,8 +120,13 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         Console.WriteLine($"🤵‍♂️ Mr Hargreaves: {msg}");
                         ConsoleHelpers.Pause();
                         break;
-
-                    case 3: // Back
+                    case 3: // Turn on the wireless
+                        Console.Clear();
+                        TitleArt.Draw();
+                        RadioPlayer.PlayRadio();
+                        ConsoleHelpers.Pause();
+                        break;
+                    case 4: // Leave office
                     case -1: // Escape
                         loop = false;
                         break;
