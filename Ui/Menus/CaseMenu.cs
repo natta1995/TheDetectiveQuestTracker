@@ -43,7 +43,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         break;
                     case "4":
                         Accuse(murderCase, quest, questRepo);
-                        loop = false; // fallet avslutas efter anklagelse
+                        loop = false; // case over after accusation
                         break;
                     case "5":
                     default:
@@ -73,7 +73,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                 for (int i = 0; i < c.Suspects.Count; i++)
                 {
                     var s = c.Suspects[i];
-                    Console.WriteLine($"{i + 1}) {s.Name} ({s.Label})");
+                    Console.WriteLine($"👤 {i + 1}) {s.Name} ({s.Label})");
                 }
                 Console.WriteLine("0) Back");
                 Console.Write("> ");
@@ -117,7 +117,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
             Console.WriteLine("Who do you accuse?");
             for (int i = 0; i < c.Suspects.Count; i++)
             {
-                Console.WriteLine($"{i + 1}) {c.Suspects[i].Name} ({c.Suspects[i].Label})");
+                Console.WriteLine($"👤{i + 1}) {c.Suspects[i].Name} ({c.Suspects[i].Label})");
             }
             Console.Write("> ");
 
@@ -130,11 +130,11 @@ namespace TheDetectiveQuestTracker.UI.Menus
             Console.Clear();
             if (guessedIndex == c.KillerIndex)
             {
-                Console.WriteLine("You have solved the case, detective.");
+                Console.WriteLine(" 🏆 You have solved the case, detective.");
             }
             else
             {
-                Console.WriteLine("That was not the right suspect. Scotland Yard will take it from here.");
+                Console.WriteLine(" ❌ That was not the right suspect. Scotland Yard will take it from here.");
             }
 
             // Markera fallet som klart
