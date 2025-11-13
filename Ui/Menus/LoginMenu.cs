@@ -14,11 +14,11 @@ namespace TheDetectiveQuestTracker.UI.Menus
             nextUser = currentUser;
 
             var selection = ConsoleMenu.Select(
-                title: $"Welcome, Detective {currentUser.Username} 🕵️\nWe’ve been waiting for you...",
+                title: $"Welcome Mr {currentUser.Username} 🕵️",
                 options: new[]
                 {
-                    "📜 Open your letter",
-                    "🚪 Step into yor office",
+                    "📜 Open mail",
+                    "🚪 Step into youre office",
                     "🚶 Log out",
                     "🔚 End game"
                 },
