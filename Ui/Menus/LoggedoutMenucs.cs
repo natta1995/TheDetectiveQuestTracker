@@ -12,7 +12,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
             currentUser = null;
 
             var selection = ConsoleMenu.Select(
-                title: " Enter a world of mystery in rain-soaked London, 1944",
+                title: " Enter a world of mystery in rain-soaked London in 1944",
                 options: new[]
                 {
                     "🕵️ Register",
@@ -47,7 +47,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
         {
             Console.Clear();
             TitleArt.Draw();
-            Console.WriteLine("🕵️ Become a member\n");
+            Console.WriteLine("🕵️ Register\n");
 
             Console.Write("Alias: ");
             var u = ConsoleHelpers.ReadOrEmpty();
@@ -69,7 +69,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
         {
             Console.Clear();
             TitleArt.Draw();
-            Console.WriteLine("🚪 Enter the society\n");
+            Console.WriteLine("🚪 Login \n");
 
             Console.Write("Alias: ");
             var u = ConsoleHelpers.ReadOrEmpty();
@@ -77,8 +77,11 @@ namespace TheDetectiveQuestTracker.UI.Menus
             Console.Write("Code: ");
             var p = ConsoleHelpers.ReadOrEmpty();
 
+            Console.Clear();
             var (ok, user, msg) = auth.Login(u, p);
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(msg);
+            Console.ResetColor();
             return ok ? user : null;
         }
     }

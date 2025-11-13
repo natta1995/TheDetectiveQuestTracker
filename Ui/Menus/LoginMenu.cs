@@ -14,7 +14,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
             nextUser = currentUser;
 
             var selection = ConsoleMenu.Select(
-                title: $"Welcome Mr {currentUser.Username} 🕵️",
+                title: $"Welcome {currentUser.Username} 🕵️",
                 options: new[]
                 {
                     "📜 Open Letter From Scotland Yard",

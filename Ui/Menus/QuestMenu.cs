@@ -42,7 +42,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     {
                         "🔍 Take on a new case",
                         "📂 Rewiew your ongoing cases",
-                        "🤵‍♂️ Call on butler (Mr. Hargreaves)",
+                        "🤵‍♂️ Call on your butler (George)",
                         "📻 Turn on the the wireless",
                         "🚪 Leave office"
                     },
@@ -58,11 +58,9 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         var newQuest = gen.GenerateFor(currentUser);
                         questRepo.Add(newQuest);
 
-                        Console.WriteLine("\nA new case file has been added to your desk.\n");
+                        Console.WriteLine("\nA new case file has been added to your ongoing cases.\n");
                         Console.WriteLine($"Title: {newQuest.Title}");
                         Console.WriteLine(newQuest.Description);
-                        Console.WriteLine($"Case ID: {newQuest.Id}");
-                        Console.WriteLine("\nPress any key to return to your office...");
                         ConsoleHelpers.Pause();
                         break;
 
@@ -76,12 +74,14 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                         if (!my.Any())
                         {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("You don’t have any active cases yet.");
+                            Console.ResetColor();
                             ConsoleHelpers.Pause();
                             break;
                         }
 
-                        var options = my.Select(q => $"{q.Title} (ID: {q.Id})").ToList();
+                        var options = my.Select(q => $" ☠️ {q.Title}").ToList();
                         options.Add("⬅ Back");
 
                         var selectedIndex = ConsoleMenu.Select(
@@ -113,11 +113,11 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         CaseMenu.Show(selectedQuest, selectedCase, questRepo);
                         break;
 
-                    case 2: // Mr Gray
+                    case 2: // Butler
                         Console.Clear();
                         TitleArt.Draw();
                         var msg = GetRandomMessage();
-                        Console.WriteLine($"🤵‍♂️ Mr Hargreaves: {msg}");
+                        Console.WriteLine($"🤵‍♂️ George: {msg}");
                         ConsoleHelpers.Pause();
                         break;
                     case 3: // Turn on the wireless

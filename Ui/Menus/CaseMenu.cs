@@ -20,12 +20,12 @@ namespace TheDetectiveQuestTracker.UI.Menus
                 Console.WriteLine();
                 Console.WriteLine(murderCase.ShortSummary);
                 Console.WriteLine();
-                Console.WriteLine("What ?");
+                Console.WriteLine(" What is your next course of action detective?");
                 Console.WriteLine("1) 🔍 Examine the crime scene");
                 Console.WriteLine("2) 🕵️‍♂️ Question suspects");
                 Console.WriteLine("3) 🕰️ Review clues");
                 Console.WriteLine("4) ⚖️ Accuse a suspect");
-                Console.WriteLine("5) 🕯️ Return to your desk");
+                Console.WriteLine("5)  Return to your office");
 
                 Console.Write("> ");
                 var input = Console.ReadLine();
