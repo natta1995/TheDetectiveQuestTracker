@@ -16,62 +16,69 @@ namespace TheDetectiveQuestTracker.Services
         {
             new MurderCase
             {
-                Id = "mr_club",
-                Title = "Mordet på Mr Club",
-                ShortSummary = "En rik herre hittas död i sitt bibliotek. Fyra personer fanns i huset.",
+               
 
-                Victim = "Mr Club",
-                Place = "Hans privata bibliotek på Kensington Row",
-                CauseOfDeath = "Pistolskott i huvudet",
-                Weapon = "En liten revolver vid hans högra hand.",
+            Id = "club_library_murder",
 
-                CrimeSceneDescription =
-                    "Biblioteket är mörkpanelat, med höga bokhyllor och en brasa som nästan brunnit ut.\n" +
-                    "Mr Club sitter livlös i sin läderfåtölj, en revolver vid hans hand och ett glas\n" +
-                    "halvfullt whisky på bordet bredvid.",
+            Title = "The Library Murder on Kensington Row",
 
-                Suspects = new List<Suspect>
+            ShortSummary = "A wealthy gentleman is found dead in his private library. Four individuals were inside the house that evening.",
+
+            Victim = "Sir Reginald Blackwood",
+            Place = "His private library on Kensington Row",
+            CauseOfDeath = "A gunshot wound to the head",
+            Weapon = "A small revolver found near his right hand.",
+
+            CrimeSceneDescription =
+                "The library is panelled in dark oak, its tall bookshelves stretching up toward the ceiling.\n" +
+                "A dying fire crackles faintly in the hearth. Sir Reginald sits slumped in his leather armchair,\n" +
+                "a revolver near his right hand and a half-finished glass of whisky on the side table.\n" +
+                "Rain patters rhythmically against the tall window overlooking the quiet street.",
+
+            Suspects = new List<Suspect>
+            {
+                new Suspect
                 {
-                    new Suspect
-                    {
-                        Name = "Mr Hargreaves",
-                        Label = "butlern",
-                        Statement = "”Jag var i köket och lyssnade på radion när skottet föll.”"
-                    },
-                    new Suspect
-                    {
-                        Name = "Edward Club",
-                        Label = "brorsonen",
-                        Statement = "”Jag satt i gästrummet och skrev brev hela kvällen.”"
-                    },
-                    new Suspect
-                    {
-                        Name = "Mrs Bloom",
-                        Label = "hushållerskan",
-                        Statement = "”Jag städade matsalen, jag gick aldrig upp till biblioteket.”"
-                    },
-                    new Suspect
-                    {
-                        Name = "Mrs Ashdown",
-                        Label = "grannen",
-                        Statement = "”Jag gick hem innan regnet började.”"
-                    }
+                    Name = "Mr. Hargreaves",
+                    Label = "the butler",
+                    Statement = "\"I was in the kitchen, sir, listening to the wireless when the shot rang out — or so they tell me. I heard nothing at all.\""
                 },
-
-                Clues = new List<string>
+                new Suspect
                 {
-                    "Mr Club var vänsterhänt, men pistolen ligger vid hans högra hand.",
-                    "Radion i köket är avstängd och sladden utdragen.",
-                    "Mrs Ashdowns paraply är blött, trots att hon säger att hon gick hem innan regnet."
+                    Name = "Edmund Blackwood",
+                    Label = "the nephew",
+                    Statement = "\"I spent the evening in the guest room, writing letters. I never left the room, I assure you.\""
                 },
+                new Suspect
+                {
+                    Name = "Mrs. Beatrice Bloom",
+                    Label = "the housekeeper",
+                    Statement = "\"I was polishing the silver in the dining room. I did not go near the library, not once.\""
+                },
+                new Suspect
+                {
+                    Name = "Mrs. Evelyn Ashdown",
+                    Label = "the neighbour",
+                    Statement = "\"I left before the rain began. I heard nothing unusual, and the gentleman was quite well when I saw him last.\""
+                }
+            },
 
-                KillerIndex = 1, // Edward
-                SolutionText =
-                    "Pistolen i fel hand visar att det inte var självmord. Flera ljuger om småsaker,\n" +
-                    "men bara Edward har ett starkt motiv och ett svagt alibi. När du pressar honom\n" +
-                    "faller historien om brevet ihop, och han erkänner mordet."
-            }
-        };
+            Clues = new List<string>
+            {
+                "Sir Reginald was left-handed, but the revolver lies near his right hand.",
+                "The wireless in the kitchen is switched off, with its cord unplugged from the wall.",
+                "Mrs. Ashdown’s umbrella is still wet by the door, despite her claim that she left before the rain began."
+            },
+
+            KillerIndex = 1, // Edmund (the nephew)
+
+            SolutionText =
+                "The revolver in the wrong hand makes suicide unlikely from the start. Several suspects tell small lies, but only one has a true motive.\n\n" +
+                "Edmund's story about writing letters collapses under scrutiny; he cannot recall simple details, and no such letter is found.\n" +
+                "Faced with the inconsistencies, he finally confesses — he shot Sir Reginald in the library to secure his inheritance."
+        }
+
+                };
 
         public MurderCase? GetCaseById(string caseId) =>
             _cases.FirstOrDefault(c => c.Id == caseId);
@@ -84,10 +91,10 @@ namespace TheDetectiveQuestTracker.Services
             {
                 Title = chosen.Title,
                 Description =
-                    $"Offer: {chosen.Victim}\n" +
-                    $"Plats: {chosen.Place}\n" +
-                    $"Dödssätt: {chosen.CauseOfDeath}\n" +
-                    $"Kort: {chosen.ShortSummary}\n",
+                    $"Victim: {chosen.Victim}\n" +
+                    $"Place: {chosen.Place}\n" +
+                    $"Case of death: {chosen.CauseOfDeath}\n" +
+                    $"Summary: {chosen.ShortSummary}\n",
                 Status = QuestStatus.Accepted,
                 OwnerUsername = user.Username,
                 CaseId = chosen.Id
