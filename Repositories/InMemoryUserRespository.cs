@@ -23,6 +23,8 @@ namespace TheDetectiveQuestTracker.Repositories
     public interface IQuestRepository
     {
         void Add(Quest q);
+
+        void Update(Quest q);
         IEnumerable<Quest> GetForUser(string username);
     }
 
@@ -34,5 +36,21 @@ namespace TheDetectiveQuestTracker.Repositories
 
         public IEnumerable<Quest> GetForUser(string username)
             => _items.Where(x => x.OwnerUsername == username);
+
+        public void Update(Quest q)
+        {
+            // För in-memory behöver du egentligen inte göra någonting,
+            // eftersom du jobbar på samma referensobjekt.
+            // Men vi har metoden för att API:t ska vara tydligt.
+            var existing = _items.FirstOrDefault(x => x.Id == q.Id);
+            if (existing is null) return;
+
+            existing.Title = q.Title;
+            existing.Description = q.Description;
+            existing.OwnerUsername = q.OwnerUsername;
+            existing.Status = q.Status;
+            // Lägg till fler fält här om du senare utökar Quest
+        }
     }
+
 }

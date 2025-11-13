@@ -12,11 +12,11 @@ namespace TheDetectiveQuestTracker.UI.Menus
             currentUser = null;
 
             var selection = ConsoleMenu.Select(
-                title: " Welcome to The Secret Society",
+                title: " Enter a world of mystery in rain-soaked London, 1944",
                 options: new[]
                 {
-                    "🕵️ Become a member",
-                    "🚪 Enter the society",
+                    "🕵️ Register",
+                    "🚪 Login",
                     "🔚 End game"
                 },
                 startIndex: 0
