@@ -17,29 +17,43 @@ namespace TheDetectiveQuestTracker.Services
             
             var lines = new List<string>
             {
-"┌────────────────────────────────────────────────────────────────────────────────────────────────────────────┐",
-"│                                                                                                            │",
-"│   LONDON, 1944                                                                                             │",
-"│   Confidential Briefing — The Secret Society of Detectives                                                 │",
-"│                                                                                                            │",
-"│   The year is 1944. London lies under the shadow of war. The skies rumble, bombs fall —                    │",
-"│   yet in the city’s dark alleys, ordinary crimes never stopped.                                            │",
-"│                                                                                                            │",
-"│   Scotland Yard is overwhelmed. Too many cases. Too few who dare look the truth in the eye.                │",
-"│   That’s why we’ve turned to The Secret Society of Detectives — a group that works in the shadows          │",
-"│   when the police cannot.                                                                                  │",
-"│                                                                                                            │",
-"│   Perhaps you’ll meet the others. Perhaps not.                                                             │",
-"│   The streets of London are quiet… too quiet.                                                              │",
-"│                                                                                                            │",
-"│   But murders still happen. And someone has to solve them.                                                 │",
-"│                                                                                                            │",
-"│   Your identity will remain hidden — if you choose to walk away.                                           │",
-"│   But once you open this case, there’s no turning back.                                                    │",
-"│                                                                                                            │",
-$"│   Fade into the fog... or open your first murder file, Detective {username}.                                     │",
-"│                                                                                                            │",
-"└────────────────────────────────────────────────────────────────────────────────────────────────────────────┘",
+              
+@"
+        ┌────────────────────────────────────────────────────────────────────────────────┐
+        │                                  London, 1944                                  │
+        ├────────────────────────────────────────────────────────────────────────────────┤
+        │ My dear old friend,                                                            │
+        │                                                                                │
+        │  Word has reached me — through certain acquaintances — that you have taken on  │
+        │  far fewer cases of late. Age creeps up on us all, and this dreadful war       │
+        │  has a peculiar way of wearing a person out long before their time. The        │
+        │  endless rain this autumn has hardly helped matters either.                    │
+        │                                                                                │
+        │  I shall not draw this out, but come directly to the point:                    │
+        │  we need your help.                                                            │
+        │                                                                                │
+        │  Here at Scotland Yard I find myself utterly overwhelmed. One would hope that, │
+        │  given the state of the world, murder might be less common — but alas, evil    │
+        │  does not vanish simply because bombs fall elsewhere.                          │
+        │                                                                                │
+        │  I remember well how you once said that when you finally retired to your flat  │
+        │  on Kensington Row, you intended to spend your days in your study, warming     │
+        │  yourself by the fire, enjoying a fine cigar while leaving everything else to  │
+        │  your butler, Mr. Hargreaves. A peaceful arrangement indeed.                   │
+        │                                                                                │
+        │  And I fully understand if you do not wish to disturb those plans. I, too,     │
+        │  am approaching the age where retirement seems tempting. A quiet cottage in    │
+        │  the countryside has begun to sound rather appealing.                          │
+        │                                                                                │
+        │  But before that day comes, I would be profoundly grateful if you might        │
+        │  consider assisting us with a few final cases — with complete freedom to       │
+        │  choose only those that capture your interest.                                 │
+        │                                                                                │
+        │  With warm regards,                                                            │
+        │  Commissioner Arthur Penwood                                                   │
+        └────────────────────────────────────────────────────────────────────────────────┘
+"
+
             };
 
             foreach (var line in lines)

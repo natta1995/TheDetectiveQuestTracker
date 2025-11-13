@@ -39,10 +39,10 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     title: "What will be your next step, detective? 🕵️",
                     options: new[]
                     {
-                        "🔍 Take on a new case",
-                        "📂 Review ongoing cases",
-                        "🫖 Call on youré butler (Mr Gray)",
-                        "🚪 Go back"
+                        "🔍 Open a new murder case file",
+                        "📂 Open your desktop and review ongoing cases",
+                        "🤵‍♂️ Call on butler (Mr. Hargreaves)",
+                        "🚪 Leave office"
                     },
                     startIndex: 0
                 );
@@ -87,7 +87,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         Console.Clear();
                         TitleArt.Draw();
                         var msg = GetRandomMessage();
-                        Console.WriteLine($"Mr Gray: {msg}");
+                        Console.WriteLine($"🤵‍♂️ Mr Hargreaves: {msg}");
                         ConsoleHelpers.Pause();
                         break;
 
