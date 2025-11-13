@@ -12,12 +12,12 @@ namespace TheDetectiveQuestTracker.Services
         public static void ShowBriefingPaged(string username)
         {
             Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.ForegroundColor = ConsoleColor.Yellow;
 
             
             var lines = new List<string>
             {
-              
+
 @"
         ┌────────────────────────────────────────────────────────────────────────────────┐
         │                                  London, 1944                                  │
@@ -39,7 +39,7 @@ namespace TheDetectiveQuestTracker.Services
         │  I remember well how you once said that when you finally retired to your flat  │
         │  on Kensington Row, you intended to spend your days in your study, warming     │
         │  yourself by the fire, enjoying a fine cigar while leaving everything else to  │
-        │  your butler, Mr. Hargreaves. A peaceful arrangement indeed.                   │
+        │  your butler, George. A peaceful arrangement indeed.                           │
         │                                                                                │
         │  And I fully understand if you do not wish to disturb those plans. I, too,     │
         │  am approaching the age where retirement seems tempting. A quiet cottage in    │
@@ -55,17 +55,15 @@ namespace TheDetectiveQuestTracker.Services
 "
 
             };
+            
 
             foreach (var line in lines)
-                Console.WriteLine(line);
+                
+            Console.WriteLine(line);
 
 
             {
-                Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Press any key to return…");
-                    Console.ResetColor();
-                    Console.ReadKey(true);
+                Console.ResetColor();
                 }
             }
         }
