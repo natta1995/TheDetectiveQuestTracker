@@ -9,7 +9,8 @@ namespace TheDetectiveQuestTracker.Modell
     public enum QuestStatus
     {
         Available,
-        Accepted
+        Accepted,
+        Completed // lägg till den
     }
 
     public class Quest
@@ -19,5 +20,8 @@ namespace TheDetectiveQuestTracker.Modell
         public string Description { get; set; } = "";
         public string? OwnerUsername { get; set; }
         public QuestStatus Status { get; set; } = QuestStatus.Available;
+
+        // Viktig ny grej: koppling till själva mordfallet
+        public string? CaseId { get; set; }
     }
 }

@@ -39,8 +39,8 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     title: "What will be your next step, detective? 🕵️",
                     options: new[]
                     {
-                        "🔍 Open a new murder case file",
-                        "📂 Open your desktop and review ongoing cases",
+                        "🔍 Take on a new case",
+                        "📂 Rewiew your ongoing cases",
                         "🤵‍♂️ Call on butler (Mr. Hargreaves)",
                         "🚪 Leave office"
                     },
@@ -52,35 +52,63 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     case 0: // New case
                         Console.Clear();
                         TitleArt.Draw();
-                        var q = gen.Generate();
-                        q.OwnerUsername = currentUser.Username;
-                        q.Status = QuestStatus.Accepted;
-                        questRepo.Add(q);
 
-                        Console.WriteLine($"\nCreated: {q.Title}");
-                        Console.WriteLine(q.Description);
-                        Console.WriteLine($"ID: {q.Id}");
+                        var newQuest = gen.GenerateFor(currentUser);
+                        questRepo.Add(newQuest);
+
+                        Console.WriteLine("\nA new case file has been added to your desk.\n");
+                        Console.WriteLine($"Title: {newQuest.Title}");
+                        Console.WriteLine(newQuest.Description);
+                        Console.WriteLine($"Case ID: {newQuest.Id}");
+                        Console.WriteLine("\nPress any key to return to your office...");
                         ConsoleHelpers.Pause();
                         break;
 
                     case 1: // Ongoing cases
                         Console.Clear();
                         TitleArt.Draw();
-                        var my = questRepo.GetForUser(currentUser.Username).ToList();
+
+                        var my = questRepo.GetForUser(currentUser.Username)
+                                          .Where(q => q.Status == QuestStatus.Accepted)
+                                          .ToList();
+
                         if (!my.Any())
                         {
-                            Console.WriteLine("You don’t have any cases yet.");
+                            Console.WriteLine("You don’t have any active cases yet.");
+                            ConsoleHelpers.Pause();
+                            break;
                         }
-                        else
+
+                        var options = my.Select(q => $"{q.Title} (ID: {q.Id})").ToList();
+                        options.Add("⬅ Back");
+
+                        var selectedIndex = ConsoleMenu.Select(
+                            title: "Which case would you like to review?",
+                            options: options.ToArray(),
+                            startIndex: 0
+                        );
+
+                        if (selectedIndex == -1 || selectedIndex == options.Count - 1)
+                            break; // back / escape
+
+                        var selectedQuest = my[selectedIndex];
+
+                        if (selectedQuest.CaseId is null)
                         {
-                            foreach (var mq in my)
-                            {
-                                Console.WriteLine($"\n[{mq.Status}] {mq.Title}");
-                                Console.WriteLine(mq.Description);
-                                Console.WriteLine($"ID: {mq.Id}");
-                            }
+                            Console.WriteLine("This quest is not linked to a case yet.");
+                            ConsoleHelpers.Pause();
+                            break;
                         }
-                        ConsoleHelpers.Pause();
+
+                        var selectedCase = gen.GetCaseById(selectedQuest.CaseId);
+                        if (selectedCase is null)
+                        {
+                            Console.WriteLine("Could not find case data.");
+                            ConsoleHelpers.Pause();
+                            break;
+                        }
+
+                        CaseMenu.Show(selectedQuest, selectedCase, questRepo);
                         break;
 
                     case 2: // Mr Gray
