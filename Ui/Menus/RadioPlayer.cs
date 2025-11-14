@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheDetectiveQuestTracker.Ui
 {
+    using global::TheDetectiveQuestTracker.UI;
     using System;
     using System.Threading;
 
@@ -16,8 +17,9 @@ namespace TheDetectiveQuestTracker.Ui
             public static void PlayRadio()
             {
                 Console.Clear();
+                
 
-               
+
                 string radioArt = @"
 ┌────────────────────────────────────────┐
 │              WIRELESS SET              │

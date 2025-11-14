@@ -11,7 +11,10 @@ namespace TheDetectiveQuestTracker.UI.Menus
     {
         public static bool Show(User currentUser, IQuestRepository questRepo, MurderQuestGenerator questGen, out User? nextUser)
         {
+            
             nextUser = currentUser;
+            Console.Write("\u001b[3J");
+            Console.Clear();
 
             var selection = ConsoleMenu.Select(
                 title: $"Welcome {currentUser.Username} 🕵️",

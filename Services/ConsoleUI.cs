@@ -64,6 +64,7 @@ namespace TheDetectiveQuestTracker.Services
 
             {
                 Console.ResetColor();
+               
                 }
             }
         }
