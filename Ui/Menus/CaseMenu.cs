@@ -1,7 +1,7 @@
-﻿
-using System;
+﻿using System;
 using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
+using TheDetectiveQuestTracker.UI; // <- för ConsoleMenu
 
 namespace TheDetectiveQuestTracker.UI.Menus
 {
@@ -13,39 +13,47 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
             while (loop && quest.Status == QuestStatus.Accepted)
             {
-                Console.Clear();
-                TitleArt.Draw();
-                Console.WriteLine($"Case: {murderCase.Title}");
-                Console.WriteLine($"Status: {quest.Status}");
-                Console.WriteLine();
-                Console.WriteLine(murderCase.ShortSummary);
-                Console.WriteLine();
-                Console.WriteLine(" What is your next course of action detective?");
-                Console.WriteLine("1) 🔍 Examine the crime scene");
-                Console.WriteLine("2) 🕵️‍♂️ Question suspects");
-                Console.WriteLine("3) 🕰️ Review clues");
-                Console.WriteLine("4) ⚖️ Accuse a suspect");
-                Console.WriteLine("5)  Return to your office");
+                // Bygg titeltexten som visas över menyn
+                string title =
+                    $"Case: {murderCase.Title}\n" +
+                    $"Status: {quest.Status}\n\n" +
+                    $"{murderCase.ShortSummary}\n\n" +
+                    "What is your next course of action, detective?";
 
-                Console.Write("> ");
-                var input = Console.ReadLine();
-
-                switch (input)
+                string[] options =
                 {
-                    case "1":
+                    "🔍 Examine the crime scene",
+                    "🕵️‍♂️ Question suspects",
+                    "🕰️ Review clues",
+                    "⚖️ Accuse a suspect",
+                    "🏠 Return to your office"
+                };
+
+                // Använd piltangenter + Enter
+                int choice = ConsoleMenu.Select(title, options, startIndex: 0, wrap: true, drawTitleArt: true);
+
+                if (choice == -1) // Escape
+                {
+                    loop = false;
+                    break;
+                }
+
+                switch (choice)
+                {
+                    case 0:
                         ShowCrimeScene(murderCase);
                         break;
-                    case "2":
+                    case 1:
                         QuestionSuspects(murderCase);
                         break;
-                    case "3":
+                    case 2:
                         ShowClues(murderCase);
                         break;
-                    case "4":
+                    case 3:
                         Accuse(murderCase, quest, questRepo);
                         loop = false; // case over after accusation
                         break;
-                    case "5":
+                    case 4:
                     default:
                         loop = false;
                         break;
@@ -68,25 +76,22 @@ namespace TheDetectiveQuestTracker.UI.Menus
         {
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("Suspects:");
+                string[] options = new string[c.Suspects.Count + 1];
+
                 for (int i = 0; i < c.Suspects.Count; i++)
                 {
                     var s = c.Suspects[i];
-                    Console.WriteLine($"👤 {i + 1}) {s.Name} ({s.Label})");
+                    options[i] = $"👤 {s.Name} ({s.Label})";
                 }
-                Console.WriteLine("0) Back");
-                Console.Write("> ");
 
-                var input = Console.ReadLine();
-                if (!int.TryParse(input, out var choice) || choice == 0)
-                    return;
+                options[^1] = "⬅ Back";
 
-                int index = choice - 1;
-                if (index < 0 || index >= c.Suspects.Count)
-                    continue;
+                int choice = ConsoleMenu.Select("Suspects:", options, drawTitleArt: false);
 
-                var suspect = c.Suspects[index];
+                if (choice == -1 || choice == options.Length - 1)
+                    return; // Escape eller "Back"
+
+                var suspect = c.Suspects[choice];
                 Console.Clear();
                 Console.WriteLine($"{suspect.Name} ({suspect.Label})");
                 Console.WriteLine();
@@ -113,19 +118,21 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
         private static void Accuse(MurderCase c, Quest quest, IQuestRepository questRepo)
         {
-            Console.Clear();
-            Console.WriteLine("Who do you accuse?");
+            string[] options = new string[c.Suspects.Count + 1];
+
             for (int i = 0; i < c.Suspects.Count; i++)
             {
-                Console.WriteLine($"👤{i + 1}) {c.Suspects[i].Name} ({c.Suspects[i].Label})");
+                options[i] = $"👤 {c.Suspects[i].Name} ({c.Suspects[i].Label})";
             }
-            Console.Write("> ");
 
-            var input = Console.ReadLine();
-            if (!int.TryParse(input, out var choice))
-                return;
+            options[^1] = "⬅ Cancel";
 
-            int guessedIndex = choice - 1;
+            int choice = ConsoleMenu.Select("Who do you accuse?", options, drawTitleArt: false);
+
+            if (choice == -1 || choice == options.Length - 1)
+                return; // Escape eller "Cancel"
+
+            int guessedIndex = choice; // samma index som i c.Suspects
 
             Console.Clear();
             if (guessedIndex == c.KillerIndex)
@@ -152,3 +159,4 @@ namespace TheDetectiveQuestTracker.UI.Menus
         }
     }
 }
+
