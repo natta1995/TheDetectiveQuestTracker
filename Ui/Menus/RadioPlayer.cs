@@ -17,6 +17,7 @@ namespace TheDetectiveQuestTracker.Ui
             public static void PlayRadio()
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 
 
 
@@ -35,15 +36,15 @@ namespace TheDetectiveQuestTracker.Ui
 ";
 
                 Console.WriteLine(radioArt);
-                Console.WriteLine("The wireless crackles to life...\n");
+                Console.ResetColor();
 
-                // Lite 'static' + en enkel radio-känsla
                 PlayStatic();
                 
-
                 Console.WriteLine();
-                Console.WriteLine("\"Good evening. This is the BBC Home Service, London...\"");
+                Console.WriteLine("\"The rain keeps falling, as if even the sky has grown weary of a war that refuses to end…...\"");
                 Console.WriteLine();
+                PlayStatic();
+                
             }
 
             private static void PlayStatic()
