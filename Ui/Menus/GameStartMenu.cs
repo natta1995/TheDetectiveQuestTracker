@@ -38,7 +38,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     return true;
 
                 case 1:
-                    QuestMenu.Show(currentUser, questRepo, questGen);
+                    OfficeMenu.Show(currentUser, questRepo, questGen);
                     return true;
 
                 case 2:

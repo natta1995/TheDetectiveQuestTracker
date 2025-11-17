@@ -7,7 +7,7 @@ using TheDetectiveQuestTracker.Ui.TheDetectiveQuestTracker.UI;
 
 namespace TheDetectiveQuestTracker.UI.Menus
 {
-    internal static class QuestMenu
+    internal static class OfficeMenu
     {
         // Använd en delad Random så att snabba anrop inte ger samma resultat
         private static readonly Random _rng = new();
@@ -110,7 +110,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                             break;
                         }
 
-                        CaseMenu.Show(selectedQuest, selectedCase, questRepo);
+                        CrimeSceneMenu.Show(selectedQuest, selectedCase, questRepo);
                         break;
 
                     case 2: // Butler

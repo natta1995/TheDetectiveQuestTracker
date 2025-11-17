@@ -5,7 +5,7 @@ using TheDetectiveQuestTracker.UI; // <- för ConsoleMenu
 
 namespace TheDetectiveQuestTracker.UI.Menus
 {
-    internal static class CaseMenu
+    internal static class CrimeSceneMenu
     {
         public static void Show(Quest quest, MurderCase murderCase, IQuestRepository questRepo)
         {
