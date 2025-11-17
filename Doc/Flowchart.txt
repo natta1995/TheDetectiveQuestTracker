@@ -1,0 +1,41 @@
+﻿+----------------+
+|   Main Menu    |
+|----------------|
+| 1. Login       |
+| 2. Register    |
++----------------+
+        |
+        v
++----------------+
+|  Player Menu   |
+|----------------|
+| 1. Read Letter |
+| 2. Office      |
+| 3. Logout      |
++----------------+
+        |
+        | (2)
+        v
++----------------+
+|  Office Menu   |
+|----------------|
+| 1. Butler      |
+| 2. Radio       |
+| 3. New Case    |
+| 4. Case List   |
+| 5. Back        |
++----------------+
+        |
+        | (3 or 4)
+        v
++-----------------------+
+|   Investigation Menu  |
+|-----------------------|
+| 1. Crime Scene        |
+| 2. Interrogate        |
+| 3. Evidence           |
+| 4. Back               |
++-----------------------+
+        |
+        v
+      (Back to Office)
