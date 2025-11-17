@@ -1,1 +1,1 @@
-﻿[User Flow Diagram](Docs/Flowchart.txt)
+﻿[User Flow Diagram](Doc/Flowchart.txt)
