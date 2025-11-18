@@ -138,10 +138,15 @@ namespace TheDetectiveQuestTracker.UI.Menus
             if (guessedIndex == c.KillerIndex)
             {
                 Console.WriteLine(" 🏆 You have solved the case, detective.");
+                quest.Result = QuestResult.Solved;
+              
+                
             }
             else
             {
                 Console.WriteLine(" ❌ That was not the right suspect. Scotland Yard will take it from here.");
+                quest.Result = QuestResult.Failed;
+              
             }
 
             // Markera fallet som klart

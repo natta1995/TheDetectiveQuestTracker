@@ -13,6 +13,12 @@ namespace TheDetectiveQuestTracker.Modell
         Completed // lägg till den
     }
 
+    public enum QuestResult
+    {
+        None,       // inget resultat än (om status inte är Completed)
+        Solved,     // spelaren anklagade rätt person
+        Failed      // spelaren anklagade fel person
+    }
     public class Quest
     {
         public Guid Id { get; set; } = Guid.NewGuid();
@@ -21,7 +27,12 @@ namespace TheDetectiveQuestTracker.Modell
         public string? OwnerUsername { get; set; }
         public QuestStatus Status { get; set; } = QuestStatus.Available;
 
-        // Viktig ny grej: koppling till själva mordfallet
+        // Koppla till caset
         public string? CaseId { get; set; }
+
+        // Nytt: hur det gick
+        public QuestResult Result { get; set; } = QuestResult.None;
+
+    
     }
 }
