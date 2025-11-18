@@ -44,7 +44,8 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         "📂 Rewiew your ongoing cases",
                         "🤵‍♂️ Call on your butler (George)",
                         "📻 Turn on the the wireless",
-                        "🚪 Leave office"
+                        "🚪 Leave office",
+                        "🏅 Solved cases"
                     },
                     startIndex: 0
                 );
@@ -127,6 +128,35 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         ConsoleHelpers.Pause();
                         break;
                     case 4: // Leave office
+                    case 5:
+                        var allUserQuests = questRepo.GetForUser(currentUser.Username);
+
+                        var solvedQuests = allUserQuests
+                            .Where(q => q.Status == QuestStatus.Completed &&
+                                        q.Result == QuestResult.Solved)
+                            .ToList();
+
+                        Console.Clear();
+                        Console.WriteLine("Solved cases:");
+                        Console.WriteLine("-------------");
+
+                        if (solvedQuests.Count == 0)
+                        {
+                            Console.WriteLine("You haven't solved any cases yet.");
+                        }
+                        else
+                        {
+                            foreach (var q in solvedQuests)
+                            {
+                                Console.WriteLine($"- {q.Title}");
+                            }
+                        }
+
+                        Console.WriteLine();
+                        Console.WriteLine("Press any key to return...");
+                        Console.ReadKey(true);
+
+                        break;
                     case -1: // Escape
                         loop = false;
                         break;

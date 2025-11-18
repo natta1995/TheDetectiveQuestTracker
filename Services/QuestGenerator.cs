@@ -35,6 +35,7 @@ namespace TheDetectiveQuestTracker.Services
                     $"Cause of death: {chosen.CauseOfDeath}\n" +
                     $"Summary: {chosen.ShortSummary}\n",
                 Status = QuestStatus.Accepted,
+                Result = QuestResult.None,
                 OwnerUsername = user.Username,
                 CaseId = chosen.Id
             };
