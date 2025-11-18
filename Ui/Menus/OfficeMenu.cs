@@ -81,12 +81,13 @@ namespace TheDetectiveQuestTracker.UI.Menus
                             ConsoleHelpers.Pause();
                             break;
                         }
+ 
 
                         var options = my.Select(q => $" ☠️ {q.Title}").ToList();
                         options.Add("⬅ Back");
 
                         var selectedIndex = ConsoleMenu.Select(
-                            title: "Which case would you like to review?",
+                            title: $"Which case would you like to review? \n Ongoing cases: {my.Count}",
                             options: options.ToArray(),
                             startIndex: 0
                         );
