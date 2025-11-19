@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace TheDetectiveQuestTracker.Modell
 {
+
+    public enum CasePriority
+    {
+        Low,    // låg prio, gott om tid
+        Medium, // normal
+        High    // hög prio, kort tid
+    }
     public class Suspect // Klass för misstänka
     {
         public string Name { get; set; } = "";       // Namn (ex Jonas Andersson)
@@ -32,5 +39,7 @@ namespace TheDetectiveQuestTracker.Modell
 
         public int KillerIndex { get; set; } = -1;       // Indexet i Suspects-listan för mördaren
         public string SolutionText { get; set; } = "";   // Upplösning av fallet
+
+        public CasePriority Priority { get; set; } = CasePriority.Medium;
     }
 }
