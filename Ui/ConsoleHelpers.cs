@@ -16,7 +16,7 @@ internal static class ConsoleHelpers
 
     public static void ClearWithTitle()
     {
-        Console.Clear();
-        TitleArt.Draw();
+        //Console.Clear();
+        //TitleArt.Draw();
     }
 }
