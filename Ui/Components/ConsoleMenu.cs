@@ -1,7 +1,6 @@
-﻿// UI/ConsoleMenu.cs
-using System;
+﻿using System;
 
-namespace TheDetectiveQuestTracker.UI
+namespace TheDetectiveQuestTracker.Ui.Components
 {
     public static class ConsoleMenu
     {
@@ -55,10 +54,10 @@ namespace TheDetectiveQuestTracker.UI
                     switch (key)
                     {
                         case ConsoleKey.UpArrow:
-                            index = (index - 1 < 0) ? (wrap ? options.Length - 1 : 0) : index - 1;
+                            index = index - 1 < 0 ? wrap ? options.Length - 1 : 0 : index - 1;
                             break;
                         case ConsoleKey.DownArrow:
-                            index = (index + 1 >= options.Length) ? (wrap ? 0 : options.Length - 1) : index + 1;
+                            index = index + 1 >= options.Length ? wrap ? 0 : options.Length - 1 : index + 1;
                             break;
                         case ConsoleKey.Enter:
                             return index;

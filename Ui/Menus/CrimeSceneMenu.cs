@@ -1,7 +1,7 @@
 ﻿using System;
 using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
-using TheDetectiveQuestTracker.UI; // <- för ConsoleMenu
+using TheDetectiveQuestTracker.Ui.Components;
 
 namespace TheDetectiveQuestTracker.UI.Menus
 {
