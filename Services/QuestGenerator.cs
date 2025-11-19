@@ -22,11 +22,9 @@ namespace TheDetectiveQuestTracker.Services
 
         public IReadOnlyList<MurderCase> GetAllCases() => _cases;
 
-        public Quest GenerateFor(User user)
+        public Quest GenerateFor(User user, MurderCase chosen)
         {
-            var chosen = _cases[_rng.Next(_cases.Count)];
-
-            var quest = new Quest
+            return new Quest
             {
                 Title = chosen.Title,
                 Description =
@@ -34,14 +32,20 @@ namespace TheDetectiveQuestTracker.Services
                     $"Place: {chosen.Place}\n" +
                     $"Cause of death: {chosen.CauseOfDeath}\n" +
                     $"Summary: {chosen.ShortSummary}\n",
-                Status = QuestStatus.Accepted,
+                Status = QuestStatus.Accepted,   // direkt till pågående
                 Result = QuestResult.None,
                 OwnerUsername = user.Username,
                 CaseId = chosen.Id
             };
-
-            return quest;
         }
+
+        // Behåll ev. den gamla för “random fall” om du vill:
+        public Quest GenerateRandomFor(User user)
+        {
+            var chosen = _cases[_rng.Next(_cases.Count)];
+            return GenerateFor(user, chosen);
+        }
+
     }
 }
 

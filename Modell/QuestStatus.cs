@@ -32,6 +32,12 @@ namespace TheDetectiveQuestTracker.Modell
 
         public QuestResult Result { get; set; } = QuestResult.None; // Se ovan
 
-    
+        public DateTime? AcceptedAt { get; set; }
+        public DateTime? ExpiresAt { get; set; }
+
+        // Liten hjälp-property om du vill kolla om det gått ut
+        public bool IsExpired => ExpiresAt.HasValue && DateTime.Now > ExpiresAt.Value;
+
+
     }
 }

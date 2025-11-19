@@ -56,9 +56,51 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         Console.Clear();
                         TitleArt.Draw();
 
-                        var newQuest = gen.GenerateFor(currentUser);
+                        // 1. Hämta ALLA hårdkodade fall
+                        var allmurderCases = gen.GetAllCases();
+
+                        // 2. Hämta alla quests för den här användaren
+                        var allUsermurderQuests = questRepo.GetForUser(currentUser.Username).ToList();
+
+                        // 3. Filtrera fram fall som INTE redan har ett quest för den här användaren
+                        //    (detta är i praktiken dina "Available" fall)
+                        var availableCases = allmurderCases
+                            .Where(c => !allUsermurderQuests.Any(q => q.CaseId == c.Id))
+                            .ToList();
+
+                        if (!availableCases.Any())
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.WriteLine("You have already taken on all available cases.");
+                            Console.ResetColor();
+                            ConsoleHelpers.Pause();
+                            break;
+                        }
+
+                        // 4. Bygg meny med de tillgängliga fallen
+                        var caseOptions = availableCases
+                            .Select(c => $" ☠️ {c.Title} Priority: {c.Priority}")
+                            .ToList();
+
+                        caseOptions.Add("⬅ Back");
+
+                        var chosenIndex = ConsoleMenu.Select(
+                            title: "Which case file would you like to take on?",
+                            options: caseOptions.ToArray(),
+                            startIndex: 0
+                        );
+
+                        if (chosenIndex == -1 || chosenIndex == caseOptions.Count - 1)
+                            break; // back / escape
+
+                        var chosenCase = availableCases[chosenIndex];
+
+                        // 5. Skapa ett quest för JUST det här fallet
+                        var newQuest = gen.GenerateFor(currentUser, chosenCase);
                         questRepo.Add(newQuest);
 
+                        Console.Clear();
+                        TitleArt.Draw();
                         Console.WriteLine("\nA new case file has been added to your ongoing cases.\n");
                         Console.WriteLine($"Title: {newQuest.Title}");
                         Console.WriteLine(newQuest.Description);

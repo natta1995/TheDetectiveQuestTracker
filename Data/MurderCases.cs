@@ -11,6 +11,7 @@ namespace TheDetectiveQuestTracker.Services
             new MurderCase
             {
                 Id = "club_library_murder",
+                Priority = CasePriority.Medium,
                 Title = "The Library Murder on Kensington Row",
                 ShortSummary = "A wealthy gentleman is found dead in his private library. Four individuals were inside the house that evening.",
                 Victim = "Sir Reginald Blackwood",
@@ -67,10 +68,9 @@ namespace TheDetectiveQuestTracker.Services
             {
 
                 Id = "ashcroft_midnight_tragedy",
+                Priority = CasePriority.High,
                 Title = "The Midnight Tragedy at Ashcroft Manor",
-
                 ShortSummary = "During a stormy night at the remote Ashcroft Manor, the master of the house dies during his own dinner party. Four guests remain under suspicion.",
-
                 Victim = "Lord Percival Ashcroft",
                 Place = "The dining hall of Ashcroft Manor",
                 CauseOfDeath = "Poisoning",
@@ -130,6 +130,7 @@ namespace TheDetectiveQuestTracker.Services
              new MurderCase
             {
                 Id = "covent_garden_clockmaker_murder",
+                Priority = CasePriority.Low,
                 Title = "The Clockmaker’s Last Hour in Covent Garden",
 
                 ShortSummary = "A famous clockmaker is found dead in his workshop among shattered gears and ticking mechanisms. Four individuals had business with him that evening.",
