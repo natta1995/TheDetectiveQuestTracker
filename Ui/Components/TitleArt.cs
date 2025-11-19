@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using System;
 
-namespace TheDetectiveQuestTracker.UI;
+namespace TheDetectiveQuestTracker.Ui.Components;
 
 internal static class TitleArt
 {

@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace TheDetectiveQuestTracker.UI;
+namespace TheDetectiveQuestTracker.Ui.Components;
 
 internal static class ConsoleHelpers
 {
