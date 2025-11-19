@@ -5,10 +5,6 @@ namespace TheDetectiveQuestTracker.UI
 {
     public static class ConsoleMenu
     {
-        /// <summary>
-        /// Visa en vertikal meny där du navigerar med ↑/↓ och väljer med Enter.
-        /// Returnerar valt index, eller -1 om användaren trycker Escape.
-        /// </summary>
         public static int Select(string title, string[] options, int startIndex = 0, bool wrap = true, bool drawTitleArt = true)
         {
             if (options is null || options.Length == 0)
@@ -22,23 +18,36 @@ namespace TheDetectiveQuestTracker.UI
 
             try
             {
+                Console.Clear(); // rensa EN gång i början
+
+                if (drawTitleArt)
+                    TitleArt.Draw();
+
+                if (!string.IsNullOrWhiteSpace(title))
+                {
+                    Console.WriteLine(title);
+                    Console.WriteLine();
+                }
+
+                // Här börjar själva menyn – kom ihåg denna Y-position
+                int menuTop = Console.CursorTop;
+
                 while (running)
                 {
-                    Console.Clear();
-                    if (drawTitleArt)
-                        TitleArt.Draw();
-
-                    if (!string.IsNullOrWhiteSpace(title))
-                    {
-                        Console.WriteLine(title);
-                        Console.WriteLine();
-                    }
+                    // Flytta tillbaka till början av menyn
+                    Console.SetCursorPosition(0, menuTop);
 
                     // Rita alla rader (markerad rad inverterad)
                     for (int i = 0; i < options.Length; i++)
                     {
-                        if (i == index) Invert(() => Console.WriteLine($"> {options[i]}"));
-                        else Console.WriteLine($"  {options[i]}");
+                        // Rensa raden först (så gamla tecken inte hänger kvar)
+                        Console.Write(new string(' ', Console.WindowWidth));
+                        Console.SetCursorPosition(0, menuTop + i);
+
+                        if (i == index)
+                            Invert(() => Console.WriteLine($"> {options[i]}"));
+                        else
+                            Console.WriteLine($"  {options[i]}");
                     }
 
                     // Läs tangent
@@ -56,7 +65,7 @@ namespace TheDetectiveQuestTracker.UI
                         case ConsoleKey.Escape:
                             return -1;
                         default:
-                            // Snabbval 1..9 (frivilligt)
+                            // Snabbval 1..9
                             if (key >= ConsoleKey.D1 && key <= ConsoleKey.D9)
                             {
                                 int quick = (int)key - (int)ConsoleKey.D1; // 0-baserat
@@ -84,5 +93,7 @@ namespace TheDetectiveQuestTracker.UI
                 Console.BackgroundColor = bg;
             }
         }
+
+
     }
 }
