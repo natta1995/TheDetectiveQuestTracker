@@ -32,11 +32,11 @@ namespace TheDetectiveQuestTracker.Services
 
             // 3) Finns användarnamnet redan?
             var existing = _repo.FindByUsername(username);
-            if (existing != null) return (false, "Användarnamnet är upptaget.");
+            if (existing != null) return (false, "Alias already exists");
 
             // 4) Krävs minst email eller telefon
             if (string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(phone))
-                return (false, "Ange minst e-post eller telefonnummer.");
+                return (false, "Put in at least one: email or phone number");
 
             // 5) Skapa och spara användare
             var user = new User
@@ -49,7 +49,7 @@ namespace TheDetectiveQuestTracker.Services
             };
 
             _repo.Create(user);
-            return (true, $"Registrering lyckades! Välkommen, {user.Username}.");
+            return (true, $"Registration successful! Welcome, {user.Username}.");
         }
 
         // Logga in
@@ -57,7 +57,7 @@ namespace TheDetectiveQuestTracker.Services
         {
             var user = _repo.FindByUsername(username);
             if (user == null || user.Password != password)
-                return (false, null, "Fel användarnamn eller lösenord.");
+                return (false, null, "Wrong alias or Password.");
 
             user.LastLogin = DateTime.UtcNow;
             _repo.Update(user);
@@ -76,11 +76,12 @@ namespace TheDetectiveQuestTracker.Services
         // -------------------------
         private static (bool ok, string msg) ValidatePassword(string password)
         {
-            if (password.Length < 6) return (false, "Minst 6 tecken.");
-            if (!Regex.IsMatch(password, "[A-Z]")) return (false, "Minst en versal (A–Z).");
-            if (!Regex.IsMatch(password, "\\d")) return (false, "Minst en siffra (0–9).");
-            if (!Regex.IsMatch(password, "[\\W_]")) return (false, "Minst ett specialtecken.");
+            if (password.Length < 6) return (false, "At least 6 characters.");
+            if (!Regex.IsMatch(password, "[A-Z]")) return (false, "At least one uppercase letter (A–Z).");
+            if (!Regex.IsMatch(password, "\\d")) return (false, "At least one digit (0–9).");
+            if (!Regex.IsMatch(password, "[\\W_]")) return (false, "At least one special character.");
             return (true, "OK");
+
         }
     }
 }

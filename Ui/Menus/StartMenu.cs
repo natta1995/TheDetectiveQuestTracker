@@ -53,7 +53,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
             Console.Write("Alias: ");
             var u = ConsoleHelpers.ReadOrEmpty();
 
-            Console.Write("Code: ");
+            Console.Write("Password: ");
             var p = ConsoleHelpers.ReadOrEmpty();
 
             Console.Write("Email (valfritt): ");
@@ -75,7 +75,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
             Console.Write("Alias: ");
             var u = ConsoleHelpers.ReadOrEmpty();
 
-            Console.Write("Code: ");
+            Console.Write("Password: ");
             var p = ConsoleHelpers.ReadOrEmpty();
 
             Console.Clear();
