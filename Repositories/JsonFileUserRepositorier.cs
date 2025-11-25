@@ -31,7 +31,7 @@ namespace TheDetectiveQuestTracker.Repositories
             lock (_lock)
             {
                 if (_users.Any(u => u.Username.Equals(user.Username, StringComparison.OrdinalIgnoreCase)))
-                    throw new InvalidOperationException("Användarnamnet är upptaget.");
+                    throw new InvalidOperationException("The alias is already taken.");
                 _users.Add(user);
                 Save();
             }
