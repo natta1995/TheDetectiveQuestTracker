@@ -77,12 +77,29 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                         // 5. Skapa ett quest för JUST det här fallet
                         var newQuest = gen.GenerateFor(currentUser, chosenCase);
+                        // 🕒 Sätt tid baserat på prioriteten på fallet
+                        var now = DateTime.Now;
+
+                        TimeSpan limit = chosenCase.Priority switch
+                        {
+                            CasePriority.Low => TimeSpan.FromHours(72),
+                            CasePriority.Medium => TimeSpan.FromHours(48),
+                            CasePriority.High => TimeSpan.FromHours(24),
+                            _ => TimeSpan.FromHours(48)
+                        };
+
+                        newQuest.AcceptedAt = now;
+                        newQuest.ExpiresAt = now.Add(limit);
+
                         questRepo.Add(newQuest);
+                        
+
 
                         Console.Clear();
                         TitleArt.Draw();
                         Console.WriteLine("\nA new case file has been added to your ongoing cases.\n");
                         Console.WriteLine($"Title: {newQuest.Title}");
+                        Console.WriteLine($"Deadline: {newQuest.ExpiresAt}");
                         Console.WriteLine(newQuest.Description);
                         ConsoleHelpers.Pause();
                         break;
