@@ -104,13 +104,34 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         ConsoleHelpers.Pause();
                         break;
 
+                   
                     case 1: // Ongoing cases
                         Console.Clear();
                         TitleArt.Draw();
 
-                        var my = questRepo.GetForUser(currentUser.Username)
-                                          .Where(q => q.Status == QuestStatus.Accepted)
-                                          .ToList();
+                        // 1. Hämta alla quests för användaren
+                        var allMyQuests = questRepo.GetForUser(currentUser.Username).ToList();
+
+                        var timeNow = DateTime.Now;
+
+                        // 2. Uppdatera de som har gått ut: Accepted + tidsgräns passerad -> Completed + Failed
+                        foreach (var q in allMyQuests)
+                        {
+                            if (q.Status == QuestStatus.Accepted &&
+                                q.ExpiresAt is not null &&
+                                q.ExpiresAt <= timeNow &&
+                                q.Result == QuestResult.None)
+                            {
+                                q.Status = QuestStatus.Completed;
+                                q.Result = QuestResult.Failed;
+                                questRepo.Update(q);
+                            }
+                        }
+
+                        // 3. Bygg lista över pågående fall (Accepted) efter uppdateringen
+                        var my = allMyQuests
+                            .Where(q => q.Status == QuestStatus.Accepted)
+                            .ToList();
 
                         if (!my.Any())
                         {
@@ -120,13 +141,72 @@ namespace TheDetectiveQuestTracker.UI.Menus
                             ConsoleHelpers.Pause();
                             break;
                         }
- 
 
-                        var options = my.Select(q => $" ☠️ {q.Title}").ToList();
+                        // 4. Räkna akuta vs okej (baserat på ExpiresAt)
+                        int urgentCount = 0;
+                        int okCount = 0;
+
+                        foreach (var q in my)
+                        {
+                            if (q.ExpiresAt is null)
+                            {
+                                okCount++; // inga tidsgränser -> räknas som "okej"
+                                continue;
+                            }
+
+                            var remaining = q.ExpiresAt.Value - timeNow;
+
+                            if (remaining.TotalSeconds <= 0)
+                            {
+                                // borde egentligen inte finnas kvar här eftersom vi just filtrerade,
+                                // men vi kan ignorera dem
+                                continue;
+                            }
+
+                            if (remaining.TotalHours <= 24)
+                                urgentCount++;
+                            else
+                                okCount++;
+                        }
+
+                        // 5. Bygg texten som beskriver läget
+                        string statusLine;
+                        if (urgentCount == 0)
+                        {
+                            statusLine = "All your ongoing cases are under control.";
+                        }
+                        else if (urgentCount == 1 && okCount == 0)
+                        {
+                            statusLine = "One case is urgent.";
+                        }
+                        else if (urgentCount == 1 && okCount == 1)
+                        {
+                            statusLine = "One case is urgent, the other one is still under control.";
+                        }
+                        else if (urgentCount == 1)
+                        {
+                            statusLine = $"One case is urgent, the other {okCount} are still under control.";
+                        }
+                        else
+                        {
+                            statusLine = $"{urgentCount} cases are urgent, {okCount} are still under control.";
+                        }
+
+                        // 6. Bygg meny-alternativ med titlar + expiry-tid
+                        var options = my.Select(q =>
+                        {
+                            string expiresText = q.ExpiresAt is not null
+                                ? q.ExpiresAt.Value.ToString("yyyy-MM-dd HH:mm")
+                                : "no deadline";
+
+                            return $" ☠️ {q.Title}  (Expires at: {expiresText})";
+                        }).ToList();
+
                         options.Add("⬅ Back");
 
+                        // 7. Visa meny, med din extra status-text under antal fall
                         var selectedIndex = ConsoleMenu.Select(
-                            title: $"Which case would you like to review? \n Ongoing cases: {my.Count}",
+                            title: $"Which case would you like to review?\nOngoing cases: {my.Count}\n{statusLine}",
                             options: options.ToArray(),
                             startIndex: 0
                         );
@@ -153,6 +233,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                         CrimeSceneMenu.Show(selectedQuest, selectedCase, questRepo);
                         break;
+
 
                     case 2: // Butler
                         Console.Clear();
