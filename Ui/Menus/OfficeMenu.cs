@@ -25,6 +25,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         "🤵‍♂️ Call on your butler (George)",
                         "📻 Turn on the the wireless",
                         "🏅 Solved cases",
+                        "☎️ Call (Commissioner Arthur Penwood) at Scotland yard",
                         "🚪 Leave office",
                     },
                     startIndex: 0
@@ -51,7 +52,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         if (!availableCases.Any())
                         {
                             Console.ForegroundColor = ConsoleColor.DarkYellow;
-                            Console.WriteLine("You have already taken on all available cases.");
+                            Console.WriteLine("You have already taken on all available cases. \n Call your old friend Commissioner Arthur Penwood at Scotland Yard to get a new one");
                             Console.ResetColor();
                             ConsoleHelpers.Pause();
                             break;
@@ -206,7 +207,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                         // 7. Visa meny, med din extra status-text under antal fall
                         var selectedIndex = ConsoleMenu.Select(
-                            title: $"Which case would you like to review?\nOngoing cases: {my.Count}\n{statusLine}",
+                            title: $"Which case would you like to review? \n Ongoing cases: {my.Count}\n{statusLine}",
                             options: options.ToArray(),
                             startIndex: 0
                         );
@@ -278,13 +279,44 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         Console.ReadKey(true);
 
                         break;
-                    case 5: // Leave office
+                    case 5:
+                        Console.Clear();
+                        TitleArt.Draw();
+
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("Calling Scotland yard...");
+                        Console.ResetColor();
+
+                        ConsoleHelpers.Pause();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine($"\n \n 👮 Oh detective {currentUser.Username}, are you up for another mysteri?");
+                        Console.ResetColor();
+
+                        ConsoleHelpers.Pause();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("\n \n 👮 I have my desk full of cases, you now that iam more then thankfull for your help.");
+                        Console.ResetColor();
+
+                        ConsoleHelpers.Pause();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine("\n \n 👮 Let me see what files i have here...");
+                        Console.ResetColor();
+
+                        ConsoleHelpers.Pause();
+
+                        break;
+
+
+                    case 6: // Leave office
                     case -1: // Escape
                         loop = false;
                         break;
                 }
             }
         }
+
     }
+
+
 }
 
