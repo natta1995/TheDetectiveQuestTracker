@@ -21,8 +21,8 @@ namespace TheDetectiveQuestTracker.UI.Menus
                 title: $"Welcome {currentUser.Username} 🕵️",
                 options: new[]
                 {
-                    "📜 Open Letter From Scotland Yard",
-                    "🚪 Step into youre office",
+                    "📜 The Briefing",
+                    "🚪 Enter the Study to Begin",
                     "🚶 Log out",
                     "🔚 End game"
                 },

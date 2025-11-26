@@ -1,12 +1,11 @@
-﻿// UI/Menus/LoggedOutMenu.cs
-using System;
+﻿using System;
 using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Services;
 using TheDetectiveQuestTracker.Ui.Components;
 
 namespace TheDetectiveQuestTracker.UI.Menus
 {
-    internal static class LoggedOutMenu
+    internal static class StartMenu
     {
         public static bool Show(Auth auth, out User? currentUser)
         {
@@ -50,19 +49,16 @@ namespace TheDetectiveQuestTracker.UI.Menus
             TitleArt.Draw();
             Console.WriteLine("🕵️ Register\n");
 
-            Console.Write("Alias: ");
+            Console.Write("Username: ");
             var u = ConsoleHelpers.ReadOrEmpty();
 
             Console.Write("Password: ");
             var p = ConsoleHelpers.ReadOrEmpty();
 
-            Console.Write("Email (valfritt): ");
+            Console.Write("Email: ");
             var e = ConsoleHelpers.ReadOrEmpty();
 
-            Console.Write("Phone (valfritt): ");
-            var ph = ConsoleHelpers.ReadOrEmpty();
-
-            var (_, msg) = auth.Register(u, p, e, ph);
+            var (_, msg) = auth.Register(u, p, e );
             Console.WriteLine(msg);
         }
 
@@ -72,11 +68,12 @@ namespace TheDetectiveQuestTracker.UI.Menus
             TitleArt.Draw();
             Console.WriteLine("🚪 Login \n");
 
-            Console.Write("Alias: ");
+            Console.Write("Username: ");
             var u = ConsoleHelpers.ReadOrEmpty();
 
             Console.Write("Password: ");
-            var p = ConsoleHelpers.ReadOrEmpty();
+            var p = ConsoleHelpers.ReadPassword();
+
 
             Console.Clear();
             var (ok, user, msg) = auth.Login(u, p);
