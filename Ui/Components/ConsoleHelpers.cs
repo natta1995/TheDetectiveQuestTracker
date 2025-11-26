@@ -7,8 +7,10 @@ internal static class ConsoleHelpers
 {
     public static void Pause(string? message = null)
     {
+        Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine();
         Console.Write(message ?? "Press any key to continue...");
+        Console.ResetColor();
         Console.ReadKey(true);
     }
 

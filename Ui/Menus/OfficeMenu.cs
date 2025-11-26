@@ -9,7 +9,45 @@ using TheDetectiveQuestTracker.Ui.Components;
 namespace TheDetectiveQuestTracker.UI.Menus
 {
     internal static class OfficeMenu
+
     {
+        private static readonly Random _rng = new();
+
+        private static readonly FakeAiCaseGenerator _aiGenerator = new();
+
+        // 🔹 Lista med korta rubriker som Scotland Yard kan erbjuda
+        private static readonly string[] _yardTitles =
+        {
+            "The Murder at the Grand Hotel",
+            "The Boy in the Stables",
+            "The Lady on the Bridge",
+            "Shadows in the Alley",
+            "Death at the Boarding House",
+            "The Pianist in Room 12",
+            "The Body by the Railway Arch",
+            "The Widow on Baker Street"
+            // lägg till fler här om du vill
+        };
+
+        // 🔹 Hjälpmetod: plocka ut två slumpmässiga, olika titlar
+        private static (string first, string second) GetTwoRandomYardTitles()
+        {
+            if (_yardTitles.Length == 0)
+                return ("Untitled case", "Another untitled case");
+
+            if (_yardTitles.Length == 1)
+                return (_yardTitles[0], _yardTitles[0]);
+
+            int firstIndex = _rng.Next(_yardTitles.Length);
+            int secondIndex;
+            do
+            {
+                secondIndex = _rng.Next(_yardTitles.Length);
+            }
+            while (secondIndex == firstIndex);
+
+            return (_yardTitles[firstIndex], _yardTitles[secondIndex]);
+        }
         public static void Show(User currentUser, IQuestRepository questRepo, MurderQuestGenerator gen)
         {
             bool loop = true;
@@ -273,32 +311,102 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         Console.ReadKey(true);
 
                         break;
+
+
                     case 4:
+                    // Call Scotland Yard + AI
                         Console.Clear();
                         TitleArt.Draw();
 
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("Calling Scotland yard...");
+                        Console.WriteLine("Calling Scotland Yard...");
                         Console.ResetColor();
 
                         ConsoleHelpers.Pause();
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine($"\n \n 👮 Oh detective {currentUser.Username}, are you up for another mysteri?");
+                        Console.WriteLine($"\n\n👮 \"Ah, detective {currentUser.Username}, are you up for another mystery?\"");
                         Console.ResetColor();
 
                         ConsoleHelpers.Pause();
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("\n \n 👮 I have my desk full of cases, you now that iam more then thankfull for your help.");
+                        Console.WriteLine("\n\n👮 \"My desk is overflowing with files, as you know. I’m more than grateful for your help.\"");
                         Console.ResetColor();
 
                         ConsoleHelpers.Pause();
                         Console.ForegroundColor = ConsoleColor.Yellow;
-                        Console.WriteLine("\n \n 👮 Let me see what files i have here...");
+                        Console.WriteLine("\n\n👮 \"Let me see what files I have here...\"");
                         Console.ResetColor();
 
                         ConsoleHelpers.Pause();
 
+                        // 1. Hämta två slumpade rubriker
+                        var (title1, title2) = GetTwoRandomYardTitles();
+
+                        var offerOptions = new[]
+                        {
+        title1,
+        title2,
+        "⬅ Hang up"
+    };
+
+                        var offerIndex = ConsoleMenu.Select(
+                            title: "👮 \"Which of these cases would you consider, sir?\"",
+                            options: offerOptions,
+                            startIndex: 0
+                        );
+
+                        if (offerIndex == -1 || offerIndex == offerOptions.Length - 1)
+                        {
+                            Console.WriteLine("\n👮 \"Very well, sir. Perhaps another time.\" *click*");
+                            ConsoleHelpers.Pause();
+                            break;
+                        }
+
+                        var chosenTitle = offerOptions[offerIndex];
+
+                        Console.WriteLine($"\n👮 \"Excellent. I’ll have the file on '{chosenTitle}' sent to your office immediately.\"");
+                        ConsoleHelpers.Pause();
+
+                        // 2. Generera AI-fall utifrån vald titel
+                        Console.WriteLine("\n(Commissioner Penwood is dictating details to the clerks at Scotland Yard...)");
+                        ConsoleHelpers.Pause();
+
+                        MurderCase aiCase;
+
+                        try
+                        {
+                            aiCase = _aiGenerator.GenerateCaseFromTitle(chosenTitle);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"\nSomething went wrong while generating the case: {ex.Message}");
+                            Console.ResetColor();
+                            ConsoleHelpers.Pause();
+                            break;
+                        }
+
+                        if (aiCase == null)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nI am terribly sorry, sir. Scotland Yard failed to send a proper case file.");
+                            Console.ResetColor();
+                            ConsoleHelpers.Pause();
+                            break;
+                        }
+
+                        // 3. Lägg till fallet i MurderCases så att det dyker upp bland tillgängliga fall
+                        MurderCases.Add(aiCase);
+
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine($"\nA new case has been added to your archives:\n  {aiCase.Title}");
+                        Console.ResetColor();
+                        Console.WriteLine("You can now take it on from '🔍 Take on a new case'.");
+                        ConsoleHelpers.Pause();
                         break;
+
+
+                     
 
 
                     case 5: // Leave office

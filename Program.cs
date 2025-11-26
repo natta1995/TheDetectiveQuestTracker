@@ -11,6 +11,8 @@ namespace TheDetectiveQuestTracker
     {
         private static void Main(string[] args)
         {
+           
+
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             // Composition root
