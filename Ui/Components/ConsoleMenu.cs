@@ -39,15 +39,28 @@ namespace TheDetectiveQuestTracker.Ui.Components
                     // Rita alla rader (markerad rad inverterad)
                     for (int i = 0; i < options.Length; i++)
                     {
-                        // Rensa raden först (så gamla tecken inte hänger kvar)
-                        Console.Write(new string(' ', Console.WindowWidth));
-                        Console.SetCursorPosition(0, menuTop + i);
+                        var row = menuTop + i;
 
+                        // Skydda mot att gå utanför bufferten (annars kraschar SetCursorPosition)
+                        if (row >= Console.BufferHeight)
+                            break; // eller continue; men break räcker – fler rader får inte plats ändå
+
+                        // Ställ markören på rätt rad
+                        Console.SetCursorPosition(0, row);
+
+                        // Rensa hela raden
+                        Console.Write(new string(' ', Console.WindowWidth));
+
+                        // Flytta tillbaka till början av raden
+                        Console.SetCursorPosition(0, row);
+
+                        // Skriv valet
                         if (i == index)
                             Invert(() => Console.WriteLine($"> {options[i]}"));
                         else
                             Console.WriteLine($"  {options[i]}");
                     }
+
 
                     // Läs tangent
                     var key = Console.ReadKey(true).Key;

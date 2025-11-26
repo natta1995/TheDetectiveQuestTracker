@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using TheDetectiveQuestTracker.Modell;
 
-namespace TheDetectiveQuestTracker.Services
+namespace TheDetectiveQuestTracker.Modell
 {
     public static class MurderCases
     {
@@ -191,6 +191,12 @@ namespace TheDetectiveQuestTracker.Services
 
                     
         };
+
+        // 👉 Lägg till denna metod för att kunna göra MurderCases.Add(aiCase);
+        public static void Add(MurderCase murderCase)
+        {
+            All.Add(murderCase);
+        }
     }
 }
 
