@@ -4,7 +4,7 @@ using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
 using TheDetectiveQuestTracker.Services;
 using TheDetectiveQuestTracker.Ui.Components;
-using TheDetectiveQuestTracker.Ui.TheDetectiveQuestTracker.UI;
+
 
 namespace TheDetectiveQuestTracker.UI.Menus
 {
@@ -17,16 +17,15 @@ namespace TheDetectiveQuestTracker.UI.Menus
             while (loop)
             {
                 var selection = ConsoleMenu.Select(
-                    title: "What will be your next step, detective? 🕵️",
+                    title: "🕵️ Study - Where would you like to start ",
                     options: new[]
                     {
                         "🔍 Take on a new case",
                         "📂 Rewiew your ongoing cases",
                         "🤵‍♂️ Call on your butler (George)",
-                        "📻 Turn on the the wireless",
-                        "🏅 Solved cases",
-                        "☎️ Call (Commissioner Arthur Penwood) at Scotland yard",
-                        "🚪 Leave office",
+                        "🏅 Gloat over solved cases",
+                        "☎️ Call Scotland Yard (Commissioner Penwood)",
+                        "🚪 Leave study",
                     },
                     startIndex: 0
                 );
@@ -243,14 +242,9 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         Console.WriteLine($"🤵‍♂️ George: {msg}");
                         ConsoleHelpers.Pause();
                         break;
-                    case 3: // Turn on the wireless
-                        Console.Clear();
-                        TitleArt.Draw();
-                        RadioPlayer.PlayRadio();
-                        ConsoleHelpers.Pause();
-                        break;
                   
-                    case 4:
+                  
+                    case 3:
                         var allUserQuests = questRepo.GetForUser(currentUser.Username);
 
                         var solvedQuests = allUserQuests
@@ -279,7 +273,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         Console.ReadKey(true);
 
                         break;
-                    case 5:
+                    case 4:
                         Console.Clear();
                         TitleArt.Draw();
 
@@ -307,7 +301,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         break;
 
 
-                    case 6: // Leave office
+                    case 5: // Leave office
                     case -1: // Escape
                         loop = false;
                         break;

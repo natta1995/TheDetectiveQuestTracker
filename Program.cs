@@ -25,7 +25,7 @@ namespace TheDetectiveQuestTracker
             while (running)
             {
                 if (currentUser is null)
-                    running = LoggedOutMenu.Show(auth, out currentUser);
+                    running = StartMenu.Show(auth, out currentUser);
                 else
                     running = LoggedInMenu.Show(currentUser, questRepo, questGen, out currentUser);
             }

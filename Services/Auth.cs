@@ -20,11 +20,11 @@ namespace TheDetectiveQuestTracker.Services
         }
 
         // Registrera ny användare
-        public (bool ok, string msg) Register(string username, string password, string email, string phone)
+        public (bool ok, string msg) Register(string username, string password, string email)
         {
             // 1) Grundkoll
-            if (string.IsNullOrWhiteSpace(username)) return (false, "Alias is required.");
-            if (string.IsNullOrWhiteSpace(password)) return (false, "Code is required.");
+            if (string.IsNullOrWhiteSpace(username)) return (false, "Username is required.");
+            if (string.IsNullOrWhiteSpace(password)) return (false, "Password is required.");
 
             // 2) Lösenordspolicy (enkel)
             var (valid, policyMsg) = ValidatePassword(password);
@@ -32,11 +32,11 @@ namespace TheDetectiveQuestTracker.Services
 
             // 3) Finns användarnamnet redan?
             var existing = _repo.FindByUsername(username);
-            if (existing != null) return (false, "Alias already exists");
+            if (existing != null) return (false, "Username already exists");
 
             // 4) Krävs minst email eller telefon
-            if (string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(phone))
-                return (false, "Put in at least one: email or phone number");
+            if (string.IsNullOrWhiteSpace(email))
+                return (false, "Email is required");
 
             // 5) Skapa och spara användare
             var user = new User
@@ -44,7 +44,6 @@ namespace TheDetectiveQuestTracker.Services
                 Username = username.Trim(),
                 Password = password,            // TODO: hasha i nästa steg
                 Emejl = (email ?? "").Trim(),
-                PhoneNumber = (phone ?? "").Trim(),
                 CreatedAt = DateTime.UtcNow
             };
 
@@ -62,7 +61,7 @@ namespace TheDetectiveQuestTracker.Services
             user.LastLogin = DateTime.UtcNow;
             _repo.Update(user);
 
-            return (true, user, $" \n Is this your first time here {user.Username}?  \n Start by reading the letter.");
+            return (true, user, $" \n Welcome detectiv {user.Username} !");
         }
 
         // (Valfri) Logout – här kan du bara nolla ev. session om du använder en
