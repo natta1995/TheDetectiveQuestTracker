@@ -74,7 +74,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                 _notificationService.CheckAndSendDeadlineWarnings(currentUser, questRepo);
 
                 var selection = ConsoleMenu.Select(
-                    title: " [Location: Your Flat – Office]",
+                    title: " [Location: Your Flat – Office]\n\nA warm, book-lined study with dark mahogany shelves, \na crackling fireplace, and the soft glow of a brass lamp \nfalling over your neatly arranged desk.",
                     options: new[]
                     {
                         "🔍 Take on a new case",
@@ -267,7 +267,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                         // 7. Visa meny, med din extra status-text under antal fall
                         var selectedIndex = ConsoleMenu.Select(
-                            title: $"Select a case to be taken to the crime scene.\n \nOngoing cases: {my.Count}\n{statusLine}",
+                            title: $"🕵️‍♂️ Select a case to be taken to the crime scene.\n \nOngoing cases: {my.Count}\n{statusLine}",
                             options: options.ToArray(),
                             startIndex: 0
                         );

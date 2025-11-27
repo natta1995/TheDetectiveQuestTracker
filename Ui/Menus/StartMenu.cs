@@ -10,15 +10,19 @@ namespace TheDetectiveQuestTracker.UI.Menus
         {
             currentUser = null;
 
+        
+
             var selection = ConsoleMenu.Select(
-                title: " Enter a world of mystery in rain-soaked London in 1944",
+
+                title: "Enter a world of mystery in a rain-soaked London in 1944",
                 options: new[]
                 {
                     "🕵️ Register",
                     "🚪 Login",
                     "🔚 Exit game"
                 },
-                startIndex: 0
+                startIndex: 0,
+                drawTitleArt: true
             );
 
             switch (selection)
@@ -45,7 +49,6 @@ namespace TheDetectiveQuestTracker.UI.Menus
         private static void RegisterFlow(Auth auth)
         {
             Console.Clear();
-            TitleArt.Draw();
             Console.WriteLine("🕵️ Register\n");
 
             Console.Write("Username: ");
@@ -64,7 +67,6 @@ namespace TheDetectiveQuestTracker.UI.Menus
         private static User? LoginFlow(Auth auth)
         {
             Console.Clear();
-            TitleArt.Draw();
             Console.WriteLine("🚪 Login \n");
 
             Console.Write("Username: ");

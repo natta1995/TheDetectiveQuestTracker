@@ -4,7 +4,7 @@ namespace TheDetectiveQuestTracker.Ui.Components
 {
     public static class ConsoleMenu
     {
-        public static int Select(string title, string[] options, int startIndex = 0, bool wrap = true, bool drawTitleArt = true)
+        public static int Select(string title, string[] options, int startIndex = 0, bool wrap = true, bool drawTitleArt = false)
         {
             if (options is null || options.Length == 0)
                 throw new ArgumentException("Menu options cannot be empty.", nameof(options));

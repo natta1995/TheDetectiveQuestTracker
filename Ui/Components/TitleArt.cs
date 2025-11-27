@@ -27,5 +27,7 @@ internal static class TitleArt
         Console.WriteLine(Art);
         Console.ResetColor();
     }
+
+ 
 }
 
