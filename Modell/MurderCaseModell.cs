@@ -1,45 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-
-namespace TheDetectiveQuestTracker.Modell
+﻿namespace TheDetectiveQuestTracker.Modell
 {
-
     public enum CasePriority
     {
-        Low,    // låg prio, gott om tid
-        Medium, // normal
-        High    // hög prio, kort tid
+        Low,    
+        Medium, 
+        High    
     }
-    public class Suspect // Klass för misstänka
+    public class Suspect 
     {
-        public string Name { get; set; } = "";       // Namn (ex Jonas Andersson)
-        public string Label { get; set; } = "";      // Relation till offret (ex. "butlern" eller "brorsonen")
-        public string Statement { get; set; } = "";  // Försvarstal el albi
+        public string Name { get; set; } = ""; 
+        public string Label { get; set; } = "";      
+        public string Statement { get; set; } = "";  
     }
-
-    public class MurderCase // Klass för själva mordfallet
+    public class MurderCase 
     {
         public string Id { get; set; } = "";         
-        public string Title { get; set; } = "";  // Namn på mordfallet
-        public string ShortSummary { get; set; } = ""; // Kort beskrivning som visas i listan med mordfall
+        public string Title { get; set; } = "";  
+        public string ShortSummary { get; set; } = ""; 
+        public string Victim { get; set; } = ""; 
+        public string Place { get; set; } = ""; 
+        public string CauseOfDeath { get; set; } = ""; 
+        public string Weapon { get; set; } = ""; 
+        public string CrimeSceneDescription { get; set; } = "";
+        public string SolutionText { get; set; } = "";
 
-        public string Victim { get; set; } = ""; // Namn på offret
-        public string Place { get; set; } = ""; // Plats för mordet
-        public string CauseOfDeath { get; set; } = ""; // Dödsorsak
-        public string Weapon { get; set; } = ""; // Mordvapen
-
-        public string CrimeSceneDescription { get; set; } = ""; // Beskrivning av brottsplatsen
-
-        public List<Suspect> Suspects { get; set; } = new(); // Lista på misstänkta
-        public List<string> Clues { get; set; } = new();      // Lista på ledtrådar som kan hittas
-
-        public int KillerIndex { get; set; } = -1;       // Indexet i Suspects-listan för mördaren
-        public string SolutionText { get; set; } = "";   // Upplösning av fallet
 
         public CasePriority Priority { get; set; } = CasePriority.Medium;
+        public int KillerIndex { get; set; } = -1;
+
+
+        public List<Suspect> Suspects { get; set; } = new();
+        public List<string> Clues { get; set; } = new();
+
     }
 }
