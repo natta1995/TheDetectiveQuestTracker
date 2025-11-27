@@ -1,8 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using TheDetectiveQuestTracker.Modell;
+﻿using TheDetectiveQuestTracker.Modell;
 
 namespace TheDetectiveQuestTracker.Repositories
 {

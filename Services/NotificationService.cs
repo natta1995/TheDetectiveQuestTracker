@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using TheDetectiveQuestTracker.Modell;
+﻿using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
 
 namespace TheDetectiveQuestTracker.Services

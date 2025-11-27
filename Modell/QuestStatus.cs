@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TheDetectiveQuestTracker.Modell
+﻿namespace TheDetectiveQuestTracker.Modell
 {
-    public enum QuestStatus // Vilken status questen har
+    public enum QuestStatus 
     {
-        Available, // tillgänglig för att accepteras
-        Accepted,   // accepterad av spelaren
-        Completed  // Avslutat fall 
+        Available, 
+        Accepted,   
+        Completed  
     }
 
-    public enum QuestResult // Hur det gick med questen
+    public enum QuestResult 
     {
-        None,       // Inget resultat - inte anklagat någon ännu
-        Solved,     // spelaren anklagade RÄTT person
-        Failed      // spelaren anklagade FEl person
+        None,       
+        Solved,    
+        Failed      
     }
-    public class Quest // Själva quest-objektet
+
+    public class Quest 
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Title { get; set; } = "";
         public string Description { get; set; } = "";
-        public string? OwnerUsername { get; set; } // Vem som äger questen
-        public QuestStatus Status { get; set; } = QuestStatus.Available; // Se ovan
+        public string? OwnerUsername { get; set; } 
+        public QuestStatus Status { get; set; } = QuestStatus.Available; 
 
         // Koppla fallet till questen
         public string? CaseId { get; set; }

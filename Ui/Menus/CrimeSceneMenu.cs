@@ -32,7 +32,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                 };
 
                 // Använd piltangenter + Enter
-                int choice = ConsoleMenu.Select(title, options, startIndex: 0, wrap: true, drawTitleArt: true);
+                int choice = ConsoleMenu.Select(title, options, startIndex: 0, wrap: true, drawTitleArt: false);
 
                 if (choice == -1) // Escape
                 {
