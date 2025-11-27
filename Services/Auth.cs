@@ -43,7 +43,7 @@ namespace TheDetectiveQuestTracker.Services
             {
                 Username = username.Trim(),
                 Password = password,            // TODO: hasha i nästa steg
-                Emejl = (email ?? "").Trim(),
+                Email = (email ?? "").Trim(),
                 CreatedAt = DateTime.UtcNow
             };
 
