@@ -15,6 +15,8 @@ namespace TheDetectiveQuestTracker.UI.Menus
             {
                 // Bygg titeltexten som visas över menyn
                 string title =
+                    "[Location: Crime scen]\n" +
+                    "\n" +
                     $"Case: {murderCase.Title}\n" +
                     $"Status: {quest.Status}\n\n" +
                     $"{murderCase.ShortSummary}\n\n" +
@@ -26,7 +28,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     "🕵️‍♂️ Question suspects",
                     "🕰️ Review clues",
                     "⚖️ Accuse a suspect",
-                    "🏠 Return to your office"
+                    "🏠 Return home to your office"
                 };
 
                 // Använd piltangenter + Enter

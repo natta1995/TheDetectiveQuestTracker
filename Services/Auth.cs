@@ -61,7 +61,24 @@ namespace TheDetectiveQuestTracker.Services
             user.LastLogin = DateTime.UtcNow;
             _repo.Update(user);
 
-            return (true, user, $" \n Welcome detectiv {user.Username} !");
+            Console.Write("\nLoading game");
+            for (int i = 0; i < 3; i++)
+            {
+                Thread.Sleep(700); // väntar 0.7 sekunder
+                Console.Write(".");
+            }
+
+
+            Console.Write($"\nDetective {username} verified");
+            for (int i = 0; i < 3; i++)
+            {
+                Thread.Sleep(700); // väntar 0.7 sekunder
+                Console.Write(".");
+            }
+
+
+            return (true, user, "\nEntering your flat on Kensington Row.\n");
+
         }
 
         // (Valfri) Logout – här kan du bara nolla ev. session om du använder en
