@@ -4,6 +4,9 @@ using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
 using TheDetectiveQuestTracker.Services;
 using TheDetectiveQuestTracker.Ui.Components;
+using TheDetectiveQuestTracker.Config;
+
+
 
 
 namespace TheDetectiveQuestTracker.UI.Menus
@@ -14,6 +17,19 @@ namespace TheDetectiveQuestTracker.UI.Menus
         private static readonly Random _rng = new();
 
         private static readonly FakeAiCaseGenerator _aiGenerator = new();
+
+        private static readonly NotificationService _notificationService =
+            new NotificationService(
+                new SmtpEmailSender(
+                    host: EmailSecrets.SmtpHost,
+                    port: EmailSecrets.SmtpPort,
+                    enableSsl: EmailSecrets.SmtpEnableSsl,
+                    username: EmailSecrets.SmtpUsername,
+                    password: EmailSecrets.SmtpPassword,
+                    from: EmailSecrets.SmtpFrom
+                ));
+
+      
 
         // 🔹 Lista med korta rubriker som Scotland Yard kan erbjuda
         private static readonly string[] _yardTitles =
@@ -54,6 +70,9 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
             while (loop)
             {
+                // 🔔 Kolla deadlines och skicka ev. mail varje gång spelaren är i studyn
+                _notificationService.CheckAndSendDeadlineWarnings(currentUser, questRepo);
+
                 var selection = ConsoleMenu.Select(
                     title: "🕵️ Study - Where would you like to start ",
                     options: new[]
@@ -125,6 +144,9 @@ namespace TheDetectiveQuestTracker.UI.Menus
                             CasePriority.High => TimeSpan.FromHours(24),
                             _ => TimeSpan.FromHours(48)
                         };
+
+
+
 
                         newQuest.AcceptedAt = now;
                         newQuest.ExpiresAt = now.Add(limit);
