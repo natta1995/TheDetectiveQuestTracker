@@ -18,11 +18,11 @@ namespace TheDetectiveQuestTracker.UI.Menus
             Console.Clear();
 
             var selection = ConsoleMenu.Select(
-                title: $"Welcome {currentUser.Username} 🕵️",
+                title: $"[Location: Your Flat – Foyer]",
                 options: new[]
                 {
-                    "📜 The Briefing",
-                    "🚪 Enter the Study to Begin",
+                    "📜 Read the letter on the hall table",
+                    "🚪 Enter your office",
                     "🚶 Log out",
                     "🔚 End game"
                 },

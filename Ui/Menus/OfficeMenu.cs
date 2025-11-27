@@ -74,7 +74,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                 _notificationService.CheckAndSendDeadlineWarnings(currentUser, questRepo);
 
                 var selection = ConsoleMenu.Select(
-                    title: "🕵️ Study - Where would you like to start ",
+                    title: " [Location: Your Flat – Office]",
                     options: new[]
                     {
                         "🔍 Take on a new case",
@@ -252,6 +252,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                             statusLine = $"{urgentCount} cases are urgent, {okCount} are still under control.";
                         }
 
+                    
                         // 6. Bygg meny-alternativ med titlar + expiry-tid
                         var options = my.Select(q =>
                         {
@@ -266,7 +267,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                         // 7. Visa meny, med din extra status-text under antal fall
                         var selectedIndex = ConsoleMenu.Select(
-                            title: $"Which case would you like to review? \n Ongoing cases: {my.Count}\n{statusLine}",
+                            title: $"Select a case to be taken to the crime scene.\n \nOngoing cases: {my.Count}\n{statusLine}",
                             options: options.ToArray(),
                             startIndex: 0
                         );
@@ -336,29 +337,17 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
 
                     case 4:
-                    // Call Scotland Yard + AI
+                    // Call Scotland Yard (FakeAI)
                         Console.Clear();
                         TitleArt.Draw();
 
-                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("Calling Scotland Yard...");
-                        Console.ResetColor();
-
                         ConsoleHelpers.Pause();
-                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine($"\n\n👮 \"Ah, detective {currentUser.Username}, are you up for another mystery?\"");
-                        Console.ResetColor();
-
                         ConsoleHelpers.Pause();
-                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("\n\n👮 \"My desk is overflowing with files, as you know. I’m more than grateful for your help.\"");
-                        Console.ResetColor();
-
                         ConsoleHelpers.Pause();
-                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("\n\n👮 \"Let me see what files I have here...\"");
-                        Console.ResetColor();
-
                         ConsoleHelpers.Pause();
 
                         // 1. Hämta två slumpade rubriker
@@ -366,10 +355,10 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                         var offerOptions = new[]
                         {
-        title1,
-        title2,
-        "⬅ Hang up"
-    };
+                            title1,
+                            title2,
+                            "⬅ Hang up"
+                        };
 
                         var offerIndex = ConsoleMenu.Select(
                             title: "👮 \"Which of these cases would you consider, sir?\"",
@@ -389,10 +378,6 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         Console.WriteLine($"\n👮 \"Excellent. I’ll have the file on '{chosenTitle}' sent to your office immediately.\"");
                         ConsoleHelpers.Pause();
 
-                        // 2. Generera AI-fall utifrån vald titel
-                        Console.WriteLine("\n(Commissioner Penwood is dictating details to the clerks at Scotland Yard...)");
-                        ConsoleHelpers.Pause();
-
                         MurderCase aiCase;
 
                         try
@@ -401,18 +386,14 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         }
                         catch (Exception ex)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine($"\nSomething went wrong while generating the case: {ex.Message}");
-                            Console.ResetColor();
                             ConsoleHelpers.Pause();
                             break;
                         }
 
                         if (aiCase == null)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("\nI am terribly sorry, sir. Scotland Yard failed to send a proper case file.");
-                            Console.ResetColor();
                             ConsoleHelpers.Pause();
                             break;
                         }
@@ -420,16 +401,10 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         // 3. Lägg till fallet i MurderCases så att det dyker upp bland tillgängliga fall
                         MurderCases.Add(aiCase);
 
-                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine($"\nA new case has been added to your archives:\n  {aiCase.Title}");
-                        Console.ResetColor();
                         Console.WriteLine("You can now take it on from '🔍 Take on a new case'.");
                         ConsoleHelpers.Pause();
                         break;
-
-
-                     
-
 
                     case 5: // Leave office
                     case -1: // Escape

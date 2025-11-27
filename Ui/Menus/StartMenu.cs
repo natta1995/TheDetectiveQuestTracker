@@ -1,5 +1,4 @@
-﻿using System;
-using TheDetectiveQuestTracker.Modell;
+﻿using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Services;
 using TheDetectiveQuestTracker.Ui.Components;
 
@@ -17,7 +16,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                 {
                     "🕵️ Register",
                     "🚪 Login",
-                    "🔚 End game"
+                    "🔚 Exit game"
                 },
                 startIndex: 0
             );
@@ -77,9 +76,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
             Console.Clear();
             var (ok, user, msg) = auth.Login(u, p);
-            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(msg);
-            Console.ResetColor();
             return ok ? user : null;
         }
     }
