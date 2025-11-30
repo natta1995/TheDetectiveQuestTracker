@@ -26,14 +26,15 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     "🚶 Log out",
                     "🔚 End game"
                 },
-                startIndex: 1
+                startIndex: 1,
+                drawTitleArt: false
             );
 
             switch (selection)
             {
                 case 0:
                     Console.Clear();
-                    TitleArt.Draw();
+                
                     ConsoleUi.ShowBriefingPaged(currentUser.Username); // din befintliga
                     ConsoleHelpers.Pause();
                     return true;
