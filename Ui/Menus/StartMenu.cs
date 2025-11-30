@@ -14,7 +14,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
             var selection = ConsoleMenu.Select(
 
-                title: "Enter a world of mystery in a rain-soaked London in 1944",
+                title: "",
                 options: new[]
                 {
                     "🕵️ Register",
@@ -22,7 +22,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     "🔚 Exit game"
                 },
                 startIndex: 0,
-                drawTitleArt: true
+                drawTitleArt: false
             );
 
             switch (selection)

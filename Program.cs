@@ -3,6 +3,7 @@ using System;
 using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
 using TheDetectiveQuestTracker.Services;
+using TheDetectiveQuestTracker.Ui;
 using TheDetectiveQuestTracker.UI.Menus;
 
 namespace TheDetectiveQuestTracker
@@ -14,6 +15,8 @@ namespace TheDetectiveQuestTracker
            
 
             Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            IntroScreen.Show();
 
             // Composition root
             IUserRepository userRepo = new JsonFileUserRepository();
