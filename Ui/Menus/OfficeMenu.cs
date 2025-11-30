@@ -84,14 +84,14 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         "☎️ Call Scotland Yard (Commissioner Penwood)",
                         "🚪 Leave study",
                     },
-                    startIndex: 0
+                    startIndex: 0,
+                    drawTitleArt: false
                 );
 
                 switch (selection)
                 {
                     case 0: // New case
                         Console.Clear();
-                        TitleArt.Draw();
 
                         // 1. Hämta ALLA hårdkodade fall
                         var allmurderCases = gen.GetAllCases();
@@ -156,7 +156,6 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
 
                         Console.Clear();
-                        TitleArt.Draw();
                         Console.WriteLine("\nA new case file has been added to your ongoing cases.\n");
                         Console.WriteLine($"Title: {newQuest.Title}");
                         Console.WriteLine($"Deadline: {newQuest.ExpiresAt}");
@@ -167,8 +166,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                    
                     case 1: // Ongoing cases
                         Console.Clear();
-                        TitleArt.Draw();
-
+   
                         // 1. Hämta alla quests för användaren
                         var allMyQuests = questRepo.GetForUser(currentUser.Username).ToList();
 
@@ -298,7 +296,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                     case 2: // Butler
                         Console.Clear();
-                        TitleArt.Draw();
+                 
                         var msg = ButlerDialogue.GetRandomMessage();
                         Console.WriteLine($"🤵‍♂️ George: {msg}");
                         ConsoleHelpers.Pause();
@@ -339,7 +337,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     case 4:
                     // Call Scotland Yard (FakeAI)
                         Console.Clear();
-                        TitleArt.Draw();
+                     
 
                         Console.WriteLine("Calling Scotland Yard...");
                         ConsoleHelpers.Pause();
