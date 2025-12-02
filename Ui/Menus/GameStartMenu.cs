@@ -24,7 +24,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     "✉️ Read the letter on the hall table",
                     "🚪 Enter your office",
                     "🚶 Log out",
-                    "🔚 End game"
+                    "🔚 Exit game"
                 },
                 startIndex: 1,
                 drawTitleArt: false
