@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
 
@@ -42,7 +36,7 @@ namespace TheDetectiveQuestTracker.Services
             var user = new User
             {
                 Username = username.Trim(),
-                Password = password,            // TODO: hasha i nästa steg
+                Password = password,           
                 Email = (email ?? "").Trim(),
                 CreatedAt = DateTime.UtcNow
             };
@@ -65,7 +59,7 @@ namespace TheDetectiveQuestTracker.Services
             Console.Write("\nLoading game");
             for (int i = 0; i < 3; i++)
             {
-                Thread.Sleep(700); // väntar 0.7 sekunder
+                Thread.Sleep(600); // väntar 0.6 sekunder
                 Console.Write(".");
             }
 
@@ -73,7 +67,7 @@ namespace TheDetectiveQuestTracker.Services
             Console.Write($"\nDetective {username} verified");
             for (int i = 0; i < 3; i++)
             {
-                Thread.Sleep(700); // väntar 0.7 sekunder
+                Thread.Sleep(600); // väntar 0.6 sekunder
                 Console.Write(".");
             }
             Console.ResetColor();
@@ -82,7 +76,7 @@ namespace TheDetectiveQuestTracker.Services
 
         }
 
-        // (Valfri) Logout – här kan du bara nolla ev. session om du använder en
+        // fake logout
         public void Logout()
         {
             // Om du senare har en SessionContext: SessionContext.CurrentUser = null;

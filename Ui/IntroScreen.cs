@@ -19,11 +19,11 @@ namespace TheDetectiveQuestTracker.Ui
             Console.WriteLine("\n");
             Console.ForegroundColor = ConsoleColor.Yellow;
 
-            Console.Write("  Loading game");
+            Console.Write("Loading game");
 
             for (int i = 0; i < 5; i++)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(600);
                 Console.Write(".");
             }
             Console.ResetColor();

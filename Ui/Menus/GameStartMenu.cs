@@ -1,7 +1,4 @@
-﻿
-// UI/Menus/LoggedInMenu.cs
-using System;
-using TheDetectiveQuestTracker.Modell;
+﻿using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
 using TheDetectiveQuestTracker.Services;
 using TheDetectiveQuestTracker.Ui.Components;
@@ -24,7 +21,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     "✉️ Read the letter on the hall table",
                     "🚪 Enter your office",
                     "🚶 Log out",
-                    "🔚 End game"
+                    "🔚 Exit game"
                 },
                 startIndex: 1,
                 drawTitleArt: false

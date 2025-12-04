@@ -1,11 +1,8 @@
-﻿using System;
-using System.Linq;
-using TheDetectiveQuestTracker.Modell;
+﻿using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
 using TheDetectiveQuestTracker.Services;
 using TheDetectiveQuestTracker.Ui.Components;
 using TheDetectiveQuestTracker.Config;
-
 
 
 
@@ -30,8 +27,6 @@ namespace TheDetectiveQuestTracker.UI.Menus
                 ));
 
       
-
-        // 🔹 Lista med korta rubriker som Scotland Yard kan erbjuda
         private static readonly string[] _yardTitles =
         {
             "The Murder at the Grand Hotel",
@@ -42,10 +37,9 @@ namespace TheDetectiveQuestTracker.UI.Menus
             "The Pianist in Room 12",
             "The Body by the Railway Arch",
             "The Widow on Baker Street"
-            // lägg till fler här om du vill
         };
 
-        // 🔹 Hjälpmetod: plocka ut två slumpmässiga, olika titlar
+        
         private static (string first, string second) GetTwoRandomYardTitles()
         {
             if (_yardTitles.Length == 0)
@@ -70,7 +64,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
             while (loop)
             {
-                // 🔔 Kolla deadlines och skicka ev. mail varje gång spelaren är i studyn
+                
                 _notificationService.CheckAndSendDeadlineWarnings(currentUser, questRepo);
 
                 var selection = ConsoleMenu.Select(
@@ -145,16 +139,13 @@ namespace TheDetectiveQuestTracker.UI.Menus
                             _ => TimeSpan.FromHours(48)
                         };
 
-
-
-
+                        // Hål koll på hur mycket tid som är kvar igenom att spara AcceptedAt + ExpiresAt
                         newQuest.AcceptedAt = now;
                         newQuest.ExpiresAt = now.Add(limit);
 
+                        // quest skapas
                         questRepo.Add(newQuest);
                         
-
-
                         Console.Clear();
                         Console.WriteLine("\nA new case file has been added to your ongoing cases.\n");
                         Console.WriteLine($"Title: {newQuest.Title}");
@@ -164,7 +155,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         break;
 
                    
-                    case 1: // Ongoing cases
+                    case 1: // Alla pågående fall som användaren tagit på sig
                         Console.Clear();
    
                         // 1. Hämta alla quests för användaren
@@ -265,7 +256,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                         // 7. Visa meny, med din extra status-text under antal fall
                         var selectedIndex = ConsoleMenu.Select(
-                            title: $"🕵️‍♂️ Select a case to be taken to the crime scene.\n \nOngoing cases: {my.Count}\n{statusLine}",
+                            title: $"🕵️‍♂️ Select a case to be taken to the crime scene.\n\nOngoing cases: {my.Count}\n{statusLine}",
                             options: options.ToArray(),
                             startIndex: 0
                         );
@@ -294,7 +285,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         break;
 
 
-                    case 2: // Butler
+                    case 2: // Butler - ger random kommentarer (för ökad spel och tids känsla) 
                         Console.Clear();
                  
                         var msg = ButlerDialogue.GetRandomMessage();
@@ -335,7 +326,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
 
                     case 4:
-                    // Call Scotland Yard (FakeAI)
+                    // Call Scotland Yard (FakeAI) 
                         Console.Clear();
                      
 
@@ -399,8 +390,8 @@ namespace TheDetectiveQuestTracker.UI.Menus
                         // 3. Lägg till fallet i MurderCases så att det dyker upp bland tillgängliga fall
                         MurderCases.Add(aiCase);
 
-                        Console.WriteLine($"\nA new case has been added to your archives:\n  {aiCase.Title}");
-                        Console.WriteLine("You can now take it on from '🔍 Take on a new case'.");
+                        Console.WriteLine($"\n\n(A new case has been added to your archives:\n{aiCase.Title}");
+                        Console.WriteLine("You can now take it on from '🔍 Take on a new case').");
                         ConsoleHelpers.Pause();
                         break;
 
