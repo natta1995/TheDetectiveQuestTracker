@@ -18,6 +18,8 @@ namespace TheDetectiveQuestTracker.Ui.Components
             try
             {
                 Console.Clear(); // rensa EN gång i början
+                Console.ForegroundColor = ConsoleColor.Yellow;
+               
 
                 if (drawTitleArt)
                     TitleArt.Draw();
@@ -94,13 +96,13 @@ namespace TheDetectiveQuestTracker.Ui.Components
 
             return index;
 
-            static void Invert(Action write)
+            static void Invert(Action yellow)
             {
                 var fg = Console.ForegroundColor;
                 var bg = Console.BackgroundColor;
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.BackgroundColor = ConsoleColor.Black;
-                write();
+                yellow();
                 Console.ForegroundColor = fg;
                 Console.BackgroundColor = bg;
             }

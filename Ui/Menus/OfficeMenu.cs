@@ -68,7 +68,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                 _notificationService.CheckAndSendDeadlineWarnings(currentUser, questRepo);
 
                 var selection = ConsoleMenu.Select(
-                    title: " [Location: Your Flat – Office]\n\nA warm, book-lined study with dark mahogany shelves, \na crackling fireplace, and the soft glow of a brass lamp \nfalling over your neatly arranged desk.",
+                    title: " [Location: Your Flat – Office 🪑]\n\nA warm, book-lined study with dark mahogany shelves,\na crackling fireplace 🔥, and the soft glow of a brass lamp \nfalling over your neatly arranged desk 🪶.",
                     options: new[]
                     {
                         "🔍 Take on a new case",
@@ -101,9 +101,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                         if (!availableCases.Any())
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkYellow;
                             Console.WriteLine("You have already taken on all available cases. \n Call your old friend Commissioner Arthur Penwood at Scotland Yard to get a new one");
-                            Console.ResetColor();
                             ConsoleHelpers.Pause();
                             break;
                         }
@@ -184,9 +182,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                         if (!my.Any())
                         {
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("You don’t have any active cases yet.");
-                            Console.ResetColor();
                             ConsoleHelpers.Pause();
                             break;
                         }
