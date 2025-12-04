@@ -15,7 +15,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
             Console.Clear();
 
             var selection = ConsoleMenu.Select(
-                title: $"[Location: Your Flat – Foyer ] \n\nA warm, well-appointed foyer with polished parquet floors \nand a brass valet stand, where your rain-soaked coat now hangs.\n",
+                title: $"[Location: Your Flat – Foyer 🪞] \n\nA warm, well-appointed foyer with polished parquet floors \nand a brass valet stand, where your rain-soaked coat now hangs.🌧️🧥\n",
                 options: new[]
                 {
                     "✉️ Read the letter on the hall table",

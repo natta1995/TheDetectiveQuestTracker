@@ -14,7 +14,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
             {
                 // Bygg titeltexten som visas över menyn
                 string title =
-                    "[Location: Crime scen]\n" +
+                    "[Location: Crime scen 🔪🩸]\n" +
                     "\n" +
                     $"Case: {murderCase.Title}\n" +
                     $"Status: {quest.Status}\n\n" +

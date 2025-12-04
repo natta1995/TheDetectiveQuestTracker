@@ -55,7 +55,7 @@ namespace TheDetectiveQuestTracker.Services
             user.LastLogin = DateTime.UtcNow;
             _repo.Update(user);
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
+           
             Console.Write("\nLoading game");
             for (int i = 0; i < 3; i++)
             {
@@ -70,7 +70,7 @@ namespace TheDetectiveQuestTracker.Services
                 Thread.Sleep(600); // väntar 0.6 sekunder
                 Console.Write(".");
             }
-            Console.ResetColor();
+          
 
             return (true, user, "\n\n🏠🗝️ Entering your flat on Kensington Row.\n");
 
