@@ -1,5 +1,4 @@
-﻿using System;
-using TheDetectiveQuestTracker.Modell;
+﻿using TheDetectiveQuestTracker.Modell;
 using TheDetectiveQuestTracker.Repositories;
 using TheDetectiveQuestTracker.Ui.Components;
 
@@ -141,7 +140,6 @@ namespace TheDetectiveQuestTracker.UI.Menus
             {
                 Console.WriteLine(" 🏆 You have solved the case, detective.");
                 quest.Result = QuestResult.Solved;
-              
                 
             }
             else

@@ -50,8 +50,6 @@ namespace TheDetectiveQuestTracker.Services
                           questRepo.Update(q);
                       }
 
-
-
             }
         }
 
