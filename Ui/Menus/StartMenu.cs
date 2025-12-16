@@ -22,7 +22,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     "🔚 Exit game"
                 },
                 startIndex: 0,
-                drawTitleArt: false
+                drawTitleArt: true
             );
 
             switch (selection)
@@ -49,6 +49,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
         private static void RegisterFlow(Auth auth)
         {
             Console.Clear();
+            TitleArt.Draw();
             Console.WriteLine("🕵️ Register\n");
 
             Console.Write("Username: ");
@@ -67,6 +68,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
         private static User? LoginFlow(Auth auth)
         {
             Console.Clear();
+            TitleArt.Draw();
             Console.WriteLine("🚪 Login \n");
 
             Console.Write("Username: ");
