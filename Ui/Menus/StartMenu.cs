@@ -10,7 +10,6 @@ namespace TheDetectiveQuestTracker.UI.Menus
         {
             currentUser = null;
 
-        
 
             var selection = ConsoleMenu.Select(
 

@@ -32,7 +32,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
                 case 0:
                     Console.Clear();
                 
-                    ConsoleUi.ShowBriefingPaged(currentUser.Username); // din befintliga
+                    ConsoleUi.ShowBriefingPaged(currentUser.Username); 
                     ConsoleHelpers.Pause();
                     return true;
 
@@ -42,8 +42,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
                 case 2:
                     nextUser = null;
-                    Console.WriteLine("Utloggad.");
-                    ConsoleHelpers.Pause();
+                    Console.WriteLine("Logged out");
                     return true;
 
                 case 3:
