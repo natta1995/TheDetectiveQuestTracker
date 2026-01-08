@@ -1,7 +1,4 @@
-﻿
-using System;
-
-namespace TheDetectiveQuestTracker.Ui.Components;
+﻿namespace TheDetectiveQuestTracker.Ui.Components;
 
 internal static class ConsoleHelpers
 {
@@ -15,11 +12,7 @@ internal static class ConsoleHelpers
 
     public static string ReadOrEmpty() => Console.ReadLine() ?? string.Empty;
 
-    public static void ClearWithTitle()
-    {
-        //Console.Clear();
-        //TitleArt.Draw();
-    }
+  
 
     public static string ReadPassword()
     {

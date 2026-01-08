@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TheDetectiveQuestTracker.Ui.Components;
+﻿using TheDetectiveQuestTracker.Ui.Components;
 
 namespace TheDetectiveQuestTracker.Ui
 {
@@ -14,8 +8,6 @@ namespace TheDetectiveQuestTracker.Ui
         {
             Console.Clear();
             TitleArt.Draw();
-           
-           
 
             Console.Write("Loading game");
 

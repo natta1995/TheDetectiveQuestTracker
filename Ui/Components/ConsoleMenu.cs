@@ -18,7 +18,7 @@ namespace TheDetectiveQuestTracker.Ui.Components
             try
             {
                 Console.Clear(); // rensa EN gång i början
-                Console.ForegroundColor = ConsoleColor.Yellow;
+                //Console.ForegroundColor = ConsoleColor.Yellow;
                
 
                 if (drawTitleArt)
