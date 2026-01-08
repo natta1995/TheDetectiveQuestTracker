@@ -55,21 +55,8 @@ namespace TheDetectiveQuestTracker.Services
             user.LastLogin = DateTime.UtcNow;
             _repo.Update(user);
 
-           
-            Console.Write("\nLoading game");
-            for (int i = 0; i < 3; i++)
-            {
-                Thread.Sleep(600); // väntar 0.6 sekunder
-                Console.Write(".");
-            }
 
 
-            Console.Write($"\nDetective {username} verified");
-            for (int i = 0; i < 3; i++)
-            {
-                Thread.Sleep(600); // väntar 0.6 sekunder
-                Console.Write(".");
-            }
           
 
             return (true, user, "\n\n🏠🗝️ Entering your flat on Kensington Row.\n");

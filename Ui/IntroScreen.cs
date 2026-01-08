@@ -14,10 +14,7 @@ namespace TheDetectiveQuestTracker.Ui
         {
             Console.Clear();
             TitleArt.Draw();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-
-            Console.WriteLine("Enter a world of mystery in a rain-soaked London in 1944");
-            Console.WriteLine("\n");
+           
            
 
             Console.Write("Loading game");

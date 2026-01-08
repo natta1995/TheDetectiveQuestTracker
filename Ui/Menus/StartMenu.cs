@@ -14,7 +14,7 @@ namespace TheDetectiveQuestTracker.UI.Menus
 
             var selection = ConsoleMenu.Select(
 
-                title: "",
+                title: "Enter a world of mystery in a rain-soaked London in 1944",
                 options: new[]
                 {
                     "🕵️ Register",
@@ -45,12 +45,15 @@ namespace TheDetectiveQuestTracker.UI.Menus
                     return true;
             }
         }
+  
 
         private static void RegisterFlow(Auth auth)
         {
             Console.Clear();
             TitleArt.Draw();
+
             Console.WriteLine("🕵️ Register\n");
+            Console.WriteLine("(Password must be at least 6 characters and include A, a, 1 and a special character.)\n");
 
             Console.Write("Username: ");
             var u = ConsoleHelpers.ReadOrEmpty();
